@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route Guru
+Route::group(['middleware' => 'role:guru'], function () {
+    Route::prefix('guru')->group(function () {
+        // Route guru start here
+    });
+});
+
+// Route Siswa
+Route::group(['middleware' => 'role:siswa'], function () {
+    Route::prefix('siswa')->group(function () {
+        // Route siswa start here
+    });
+});
