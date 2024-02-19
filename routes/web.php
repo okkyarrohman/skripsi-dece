@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -29,10 +30,25 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route Guru
+Route::group(['middleware' => 'role:guru'], function () {
+    Route::prefix('guru')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'guru'])->name('dashboard.guru');
+    });
+});
+
+// Route Siswa
+Route::group(['middleware' => 'role:siswa'], function () {
+    Route::prefix('siswa')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'siswa'])->name('dashboard.siswa');
+    });
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

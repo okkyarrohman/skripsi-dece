@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Carbon\Carbon;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,10 +33,23 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $guru =  $request->user()->hasRole('guru');
+        $siswa =  $request->user()->hasRole('siswa');
+
+        if ($guru) {
+            return redirect()->route('dashboard.guru');
+        } else if ($siswa) {
+            // User berhasil login
+            $user = Auth::user();
+
+            // Set waktu login untuk sesi ini
+            $user->session_login_at = Carbon::now();
+            $user->save();
+
+            return redirect()->route('dashboard.siswa');
+        }
     }
 
     /**
@@ -42,6 +57,20 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // Update total waktu login saat logout
+        $user = Auth::user();
+
+        // Hitung selisih waktu dan tambahkan ke total_login_time
+        if ($user->session_login_at) {
+            $timeDifference = Carbon::parse($user->session_login_at)->diffInMinutes(Carbon::now());
+            $user->total_login_time += $timeDifference;
+        }
+
+        // Reset waktu login untuk sesi ini
+        $user->session_login_at = null;
+        $user->save();
+
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
