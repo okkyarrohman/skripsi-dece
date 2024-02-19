@@ -38,10 +38,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 // Route Guru
 Route::group(['middleware' => 'role:guru'], function () {
     Route::prefix('guru')->group(function () {
@@ -72,13 +68,6 @@ Route::group(['middleware' => 'role:siswa'], function () {
             'absen' => AbsenController::class,
         ]);
     });
-});
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
