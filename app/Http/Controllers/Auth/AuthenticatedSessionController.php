@@ -48,7 +48,7 @@ class AuthenticatedSessionController extends Controller
             $user->session_login_at = Carbon::now();
             $user->save();
 
-            return redirect()->route('dashboard.siswa');
+            return redirect()->route('Siswa/Dashboard');
         }
     }
 
