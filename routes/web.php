@@ -29,8 +29,16 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/materi', function () {
+    return Inertia::render('Siswa/Materi/MateriIndex');
+})->name('materi');
+
+Route::get('/materi/show', function () {
+    return Inertia::render('Siswa/Materi/MateriShow');
+});
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
