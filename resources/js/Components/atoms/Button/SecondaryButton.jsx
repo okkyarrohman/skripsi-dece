@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react";
+
 export default function SecondaryButton({
     full = false,
     size = "text-base",

@@ -26,7 +26,7 @@ export default function PrimaryButton({
     }
 
     return (
-        <Link
+        <button
             {...props}
             type={type}
             disabled={disabled}
@@ -39,6 +39,6 @@ export default function PrimaryButton({
             }
         >
             {children}
-        </Link>
+        </button>
     );
 }

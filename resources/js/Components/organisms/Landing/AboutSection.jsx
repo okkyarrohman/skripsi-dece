@@ -2,6 +2,7 @@ import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
 import LandingTitle from "@/Components/atoms/Landing/LandingTitle";
 import Description from "@/Components/atoms/Text/Description";
 import LandingAboutImage from "@/Components/molecules/Landing/LandingAboutImage";
+import { Link } from "@inertiajs/react";
 
 export default function AboutSection({ userLogin }) {
     return (
@@ -19,18 +20,20 @@ export default function AboutSection({ userLogin }) {
                         size="text-2xl"
                         desc="Platform Inter memberikan fitur yang mana guru dapat memberikan materi pembelajaran kepada siswanya yakni menggabungkan materi berupa text dan video."
                     />
-                    <PrimaryButton
+                    <Link
                         href={
                             userLogin
-                                ? userLogin.user.role == "siswa"
+                                ? userLogin.role == "siswa"
                                     ? route("dashboard.siswa")
                                     : route("dashboard.guru")
                                 : route("login")
                         }
-                        className="w-fit"
+                        className="block"
                     >
-                        Belajar Sekarang
-                    </PrimaryButton>
+                        <PrimaryButton className="w-fit">
+                            Belajar Sekarang
+                        </PrimaryButton>
+                    </Link>
                 </div>
             </div>
         </section>

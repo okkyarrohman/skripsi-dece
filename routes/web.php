@@ -44,7 +44,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('landing');
 
 // Route Guru
 Route::group(['middleware' => 'role:guru'], function () {

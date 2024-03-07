@@ -7,10 +7,11 @@ export default function Landing({ auth, laravelVersion, phpVersion }) {
     console.log(auth);
 
     return (
-        <LandingTemplate userLogin={auth}>
-            <HeroSection userLogin={auth} />
+        <LandingTemplate userLogin={auth.user}>
+            <HeroSection userLogin={auth.user} />
             <MenuSection />
-            <AboutSection userLogin={auth} />
+            <AboutSection userLogin={auth.user} />
         </LandingTemplate>
+        // <h1>Landing</h1>
     );
 }

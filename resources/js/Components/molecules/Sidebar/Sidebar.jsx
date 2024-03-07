@@ -1,7 +1,10 @@
 import LogoIcon from "@/Components/atoms/LogoIcon/LogoIcon";
 import SidebarLink from "@/Components/atoms/Sidebar/SidebarLink";
+import { usePage } from "@inertiajs/react";
 
 export default function Sidebar() {
+    const { url } = usePage();
+
     return (
         <aside className="w-72 h-screen fixed left-0 bg-gray-50 p-8 flex flex-col justify-between border-r border-r-gray-100 z-10">
             {/* Logo */}
@@ -9,7 +12,11 @@ export default function Sidebar() {
 
             {/* Top Menu */}
             <ul className="h-3/5 w-full flex flex-col justify-start gap-6 overflow-y-auto">
-                <SidebarLink>
+                <SidebarLink
+                    active={
+                        url == "/siswa/dashboard" || url == "guru/dashboard"
+                    }
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -152,7 +159,7 @@ export default function Sidebar() {
                     </svg>
                     Panduan
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink method="POST" link={route("logout")}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

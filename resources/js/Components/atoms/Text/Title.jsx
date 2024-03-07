@@ -1,3 +1,7 @@
-export default function Title({ title }) {
-    return <h4 className="font-semibold text-2xl">{title}</h4>;
+export default function Title({
+    title,
+    size = "text-2xl",
+    color = "text-block",
+}) {
+    return <h4 className={`font-semibold ${size} ${color}`}>{title}</h4>;
 }
