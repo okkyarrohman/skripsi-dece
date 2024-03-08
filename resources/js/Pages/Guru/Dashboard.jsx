@@ -1,3 +1,9 @@
-export default function Dashboard() {
-    return <h1>Dashboard</h1>;
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+
+export default function Dashboard({ auth }) {
+    return (
+        <AuthenticatedLayout userLogin={auth.user}>
+            Dashboard
+        </AuthenticatedLayout>
+    );
 }

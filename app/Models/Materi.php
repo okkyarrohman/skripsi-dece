@@ -17,4 +17,8 @@ class Materi extends Model
         'file',
         'description'
     ];
+
+    public function materi_seens() {
+        return $this->hasMany(MateriSeen::class, 'materi_id', 'id');
+    }
 }

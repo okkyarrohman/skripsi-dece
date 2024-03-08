@@ -29,14 +29,6 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/materi', function () {
-    return Inertia::render('Siswa/Materi/MateriIndex');
-})->name('materi');
-
-Route::get('/materi/show', function () {
-    return Inertia::render('Siswa/Materi/MateriShow');
-});
-
 Route::get('/', function () {
     return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),
@@ -75,6 +67,7 @@ Route::group(['middleware' => 'role:siswa'], function () {
             'kelompok' => KelompokController::class,
             'absen' => AbsenController::class,
         ]);
+        Route::post('/materi/{id}/seen', [MateriController::class, 'markSeen'])->name('materi.markSeen');
     });
 });
 

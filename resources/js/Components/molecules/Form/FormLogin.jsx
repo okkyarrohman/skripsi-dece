@@ -4,17 +4,7 @@ import InputText from "@/Components/atoms/Input/InputText";
 import Label from "@/Components/atoms/Label/Label";
 import { useForm } from "@inertiajs/react";
 
-export default function FormLogin() {
-    const { users, setUsers, post, processing, errors, reset } = useForm({
-        email: "",
-        password: "",
-    });
-
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
-        post(route("login"));
-    };
-
+export default function FormLogin({ data }) {
     return (
         <form>
             <div className="space-y-6">
