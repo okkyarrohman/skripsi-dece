@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Siswa;
+namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
-use App\Models\Referensi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ReferensiController extends Controller
+class DataSiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $referensis = Referensi::all();
+        $users = User::where('role', 'siswa')->get();
 
-        return Inertia::render('Siswa/Referensi/ReferensiIndex', compact('referensis'));
+        return Inertia::render('Guru/DataSiswa/DataSiswaIndex', compact('users'));
     }
 
     /**
@@ -40,9 +40,9 @@ class ReferensiController extends Controller
      */
     public function show(string $id)
     {
-        $referensis = Referensi::where('id', $id)->first();
+        $users = User::where('id', $id)->first();
 
-        return Inertia::render('Siswa/Referensi/ReferensiShow', compact('referensis'));
+        return Inertia::render('Guru/DataSiswa/DataSiswaShow', compact('users'));
     }
 
     /**
@@ -58,7 +58,13 @@ class ReferensiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $users = User::find($id);
+
+        $usersUpdate = $request->all();
+
+        $users->update($usersUpdate);
+
+        return to_route('data-siswa-guru.index');
     }
 
     /**

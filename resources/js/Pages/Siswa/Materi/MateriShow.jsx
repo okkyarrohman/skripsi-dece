@@ -11,7 +11,7 @@ export default function MateriShow({ auth }) {
     console.log(materi);
 
     return (
-        <AuthenticatedLayout back userLogin={auth.user} title="Materi">
+        <AuthenticatedLayout back userLogin={auth.user}>
             <div className="p-6 bg-gray-50 rounded-xl space-y-4">
                 <div className="flex items-center justify-between">
                     <MateriTitle number="01" title={materi.name} />

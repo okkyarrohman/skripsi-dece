@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
+use App\Models\Referensi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class ReferensiGuruController extends Controller
 {
@@ -12,7 +15,9 @@ class ReferensiGuruController extends Controller
      */
     public function index()
     {
-        //
+        $referensis = Referensi::all();
+
+        return Inertia::render('Guru/Referensi/ReferensiIndex', compact('referensis'));
     }
 
     /**
@@ -20,7 +25,7 @@ class ReferensiGuruController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Guru/Referensi/ReferensiCreate');
     }
 
     /**
@@ -28,7 +33,21 @@ class ReferensiGuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalName();
+            $fileName = date('YmdHis') . "." . $extension;
+            $file->move(storage_path('app/public/referensi'), $fileName);
+        }
+
+        Referensi::create([
+            'name' => $request->input('name'),
+            'slug' => $request->input('slug'),
+            'description' => $request->input('description'),
+            'file' => $fileName
+        ]);
+
+        return to_route('referensi-guru.index');
     }
 
     /**
@@ -44,7 +63,9 @@ class ReferensiGuruController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $referensis = Referensi::where('id, $id')->first();
+
+        return Inertia::render('Guru/Referensi/ReferensiEdit', compact('referensis'));
     }
 
     /**
@@ -52,7 +73,25 @@ class ReferensiGuruController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $referensis = Referensi::find($id);
+
+        if ($request->hasFile('file')) {
+            Storage::delete("public/referensi/" . $referensis->file);
+
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalName();
+            $fileName = date('YmdHis') . "." . $extension;
+            $file->move(storage_path('app/public/Submateri/file/'), $fileName);
+        } else {
+            $fileName = $referensis->file;
+        }
+
+        $referensisUpdate = $request->all();
+        $referensisUpdate['file'] = $fileName;
+
+        $referensis->update($referensisUpdate);
+
+        return to_route('referensi-guru.index');
     }
 
     /**
@@ -60,6 +99,12 @@ class ReferensiGuruController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $referensis = Referensi::find($id);
+
+        Storage::delete("public/referensi/" . $referensis->file);
+
+        $referensis->delete();
+
+        return to_route('referensi-guru.index');
     }
 }

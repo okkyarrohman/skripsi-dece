@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Guru\AbsenGuruController;
+use App\Http\Controllers\Guru\DataSiswaController;
 use App\Http\Controllers\Guru\KelompokGuruController;
 use App\Http\Controllers\Guru\MateriGuruController;
 use App\Http\Controllers\Guru\ReferensiGuruController;
@@ -50,6 +51,7 @@ Route::group(['middleware' => 'role:guru'], function () {
             'tutorial-guru' => TutorialGuruController::class,
             'kelompok-guru' => KelompokGuruController::class,
             'absensi-guru' => AbsenGuruController::class,
+            'data-siswa-guru' => DataSiswaController::class
         ]);
     });
 });

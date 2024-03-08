@@ -36,7 +36,7 @@ export default function SidebarSiswa({ url }) {
                 </SidebarLink>
                 <SidebarLink
                     link={route("materi.index")}
-                    active={url == "/siswa/materi"}
+                    active={url.startsWith("/siswa/materi")}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ export default function SidebarSiswa({ url }) {
                 </SidebarLink>
                 <SidebarLink
                     link={route("referensi.index")}
-                    active={url == "/siswa/referensi"}
+                    active={url.startsWith("/siswa/referensi")}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

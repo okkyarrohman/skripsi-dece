@@ -4,7 +4,10 @@ export default function SidebarGuru({ url }) {
     return (
         <>
             <ul className="max-h-[55%] w-full flex flex-col justify-start gap-6 overflow-y-auto pr-1">
-                <SidebarLink active={url == "/guru/dashboard"}>
+                <SidebarLink
+                    link={route("dashboard.guru")}
+                    active={url == "/guru/dashboard"}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -89,7 +92,10 @@ export default function SidebarGuru({ url }) {
                     </svg>
                     Data Siswa
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("materi-guru.index")}
+                    active={url.startsWith("/guru/materi-guru")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -213,7 +219,10 @@ export default function SidebarGuru({ url }) {
                     </svg>
                     Hasil Tugas
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("referensi-guru.index")}
+                    active={url.startsWith("/guru/referensi-guru")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

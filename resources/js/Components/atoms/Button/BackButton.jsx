@@ -1,8 +1,16 @@
 import { Link } from "@inertiajs/react";
 
 export default function BackButton() {
+    const handleBackOnClick = () => {
+        window.history.go(-1);
+    };
+
     return (
-        <Link as="button" className="flex items-center gap-1">
+        <Link
+            as="button"
+            onClick={handleBackOnClick}
+            className="flex items-center gap-1"
+        >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
