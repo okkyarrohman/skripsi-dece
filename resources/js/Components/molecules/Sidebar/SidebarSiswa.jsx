@@ -1,15 +1,13 @@
-import LogoIcon from "@/Components/atoms/LogoIcon/LogoIcon";
 import SidebarLink from "@/Components/atoms/Sidebar/SidebarLink";
 
-export default function Sidebar() {
+export default function SidebarSiswa({ url }) {
     return (
-        <aside className="w-72 h-screen fixed left-0 bg-gray-50 p-8 flex flex-col justify-between border-r border-r-gray-100 z-10">
-            {/* Logo */}
-            <LogoIcon />
-
-            {/* Top Menu */}
-            <ul className="h-3/5 w-full flex flex-col justify-start gap-6 overflow-y-auto">
-                <SidebarLink>
+        <>
+            <ul className="max-h-[55%] w-full flex flex-col justify-start gap-6 overflow-y-auto pr-1">
+                <SidebarLink
+                    link={route("dashboard.siswa")}
+                    active={url == "/siswa/dashboard"}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -36,7 +34,10 @@ export default function Sidebar() {
                     </svg>
                     Dashboard
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("materi.index")}
+                    active={url == "/siswa/materi"}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -98,7 +99,10 @@ export default function Sidebar() {
                     </svg>
                     Kelompok
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("referensi.index")}
+                    active={url == "/siswa/referensi"}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -152,7 +156,7 @@ export default function Sidebar() {
                     </svg>
                     Panduan
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink method="POST" link={route("logout")}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -176,6 +180,6 @@ export default function Sidebar() {
                     Keluar
                 </SidebarLink>
             </ul>
-        </aside>
+        </>
     );
 }

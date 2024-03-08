@@ -1,5 +1,6 @@
 import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
 import LandingHeroTitle from "@/Components/molecules/Landing/LandingHeroTitle";
+import { Link } from "@inertiajs/react";
 
 export default function HeroSection({ userLogin }) {
     return (
@@ -9,17 +10,17 @@ export default function HeroSection({ userLogin }) {
         >
             <LandingHeroTitle />
             <div className="relative z-10">
-                <PrimaryButton
+                <Link
                     href={
                         userLogin
-                            ? userLogin.user.role == "siswa"
+                            ? userLogin.role == "siswa"
                                 ? route("dashboard.siswa")
                                 : route("dashboard.guru")
                             : route("login")
                     }
                 >
-                    Belajar Sekarang
-                </PrimaryButton>
+                    <PrimaryButton>Belajar Sekarang</PrimaryButton>
+                </Link>
             </div>
             <img
                 src="/assets/vector-hero.png"

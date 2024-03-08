@@ -40,13 +40,18 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'kelas' => $request->kelas,
+            'absen' => $request->absen,
+            'role' => 'siswa',
             'password' => Hash::make($request->password),
         ]);
+        $user->assignRole('siswa');
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('dashboard.siswa');
     }
 }
