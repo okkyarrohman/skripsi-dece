@@ -21,7 +21,7 @@ class MateriFactory extends Factory
 
         return [
             'name' => $this->faker->name(),
-            'slug' => $this->faker->paragraph(),
+            'slug' => $this->faker->slug(),
             'description' => $this->faker->paragraph(),
             'file' => $filePath,
         ];

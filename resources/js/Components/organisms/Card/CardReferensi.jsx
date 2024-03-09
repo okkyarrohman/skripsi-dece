@@ -13,7 +13,7 @@ export default function CardReferensi({
     referensiId,
 }) {
     return (
-        <div className="bg-gray-50 p-3 rounded-xl space-y-4">
+        <div className="bg-gray-50 p-6 rounded-xl space-y-4">
             <div className="line-clamp-3">
                 <Title size="text-xl" title={referensiName} />
             </div>

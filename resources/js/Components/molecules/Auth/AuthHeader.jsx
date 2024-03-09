@@ -7,7 +7,7 @@ export default function AuthHeader({ title, desc }) {
         <div className="flex items-start justify-between">
             <div>
                 <Title size="text-[2rem]" title={title} />
-                <div className="w-3/5">
+                <div className="md:w-3/5 w-full">
                     <Description desc={desc} />
                 </div>
             </div>

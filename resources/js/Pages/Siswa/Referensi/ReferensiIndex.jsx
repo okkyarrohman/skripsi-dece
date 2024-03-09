@@ -1,8 +1,4 @@
-import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
-import SecondaryButton from "@/Components/atoms/Button/SecondaryButton";
-import Description from "@/Components/atoms/Text/Description";
-import Title from "@/Components/atoms/Text/Title";
-import BannerReferensi from "@/Components/molecules/Banner/BannerReferensi";
+import Banner from "@/Components/molecules/Banner/Banner";
 import CardReferensi from "@/Components/organisms/Card/CardReferensi";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { formattedDate } from "@/utils/helper";
@@ -15,10 +11,13 @@ export default function ReferensiIndex({ auth }) {
         <AuthenticatedLayout userLogin={auth.user} title="Referensi">
             <div className="space-y-5">
                 {/* Banner */}
-                <BannerReferensi />
+                <Banner
+                    title="Ciptakan Pengetahuan, Baca Sekarang!"
+                    desc="Berikut merupakan beberapa refrensi bacaan yang dapat digunakan untuk menambah materi yang ada"
+                />
 
                 {/* Items */}
-                <div className="grid grid-cols-3 gap-x-4 gap-y-4">
+                <div className="grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4">
                     {referensis.map((referensi, index) => {
                         return (
                             <CardReferensi

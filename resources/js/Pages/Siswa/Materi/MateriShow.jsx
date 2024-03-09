@@ -1,7 +1,7 @@
 import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
-import MateriTitle from "@/Components/atoms/Materi/MateriTitle";
 import PdfViewer from "@/Components/atoms/PdfViewer/PdfViewer";
 import Description from "@/Components/atoms/Text/Description";
+import Title from "@/Components/atoms/Text/Title";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Link, useForm, usePage } from "@inertiajs/react";
 
@@ -14,7 +14,7 @@ export default function MateriShow({ auth }) {
         <AuthenticatedLayout back userLogin={auth.user}>
             <div className="p-6 bg-gray-50 rounded-xl space-y-4">
                 <div className="flex items-center justify-between">
-                    <MateriTitle number="01" title={materi.name} />
+                    <Title title={materi.name} />
                     <a
                         href={"/storage/materi/" + materi.file}
                         className="w-fit block"

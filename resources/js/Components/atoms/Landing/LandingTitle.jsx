@@ -4,7 +4,9 @@ export default function LandingTitle({
     align = "text-center",
 }) {
     return (
-        <h1 className={`font-bold text-5xl ${align} capitalize ${color}`}>
+        <h1
+            className={`font-bold md:text-5xl text-3xl ${align} capitalize ${color}`}
+        >
             {children}
         </h1>
     );

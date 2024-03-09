@@ -1,5 +1,3 @@
-import MateriTitle from "@/Components/atoms/Materi/MateriTitle";
-import Description from "@/Components/atoms/Text/Description";
 import CardMateri from "@/Components/organisms/Card/CardMateri";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { formattedDate, formattedNumber } from "@/utils/helper";
@@ -12,7 +10,7 @@ export default function MateriIndex({ auth }) {
 
     return (
         <AuthenticatedLayout userLogin={auth.user} title="Materi">
-            <div className="grid grid-cols-3 gap-x-4 gap-y-4">
+            <div className="grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4">
                 {materis.map((materi, index) => {
                     return (
                         <CardMateri

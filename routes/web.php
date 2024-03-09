@@ -74,6 +74,7 @@ Route::group(['middleware' => 'role:siswa'], function () {
         ]);
         Route::post('/materi/{id}/seen', [MateriController::class, 'markSeen'])->name('materi.markSeen');
         Route::post('/referensi/{id}/seen', [ReferensiController::class, 'markSeen'])->name('referensi.markSeen');
+        Route::patch('/kelompok/{id}/join', [KelompokController::class, 'join'])->name('kelompok.join');
         Route::get('/panduan', function () {
             return Inertia::render('Siswa/Panduan');
         })->name('panduan');

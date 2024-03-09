@@ -14,7 +14,7 @@ export default function CardMateri({
     materiFile,
 }) {
     return (
-        <div className="bg-gray-50 p-3 rounded-xl space-y-4">
+        <div className="bg-gray-50 p-6 rounded-xl space-y-4">
             <MateriTitle number={materiNumber} title={materiName} />
             <div className="line-clamp-2">
                 <Description desc={materiDesc} />

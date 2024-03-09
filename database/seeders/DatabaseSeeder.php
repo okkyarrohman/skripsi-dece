@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Kelompok;
 use App\Models\Materi;
 use App\Models\MateriSeen;
 use App\Models\Referensi;
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call([RoleSeeder::class]);
         $this->call([UserSeeder::class]);
 
+        Kelompok::factory(5)->create();
         User::factory(5)->create();
         Materi::factory(5)->create();
         Referensi::factory(5)->create();

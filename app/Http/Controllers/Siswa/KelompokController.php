@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelompok;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class KelompokController extends Controller
 {
@@ -12,7 +16,11 @@ class KelompokController extends Controller
      */
     public function index()
     {
-        //
+        $kelompoks = Kelompok::with(['members'])->get();
+
+        $users = User::where('id', Auth::user()->id)->with(['kelompoks'])->first();
+
+        return Inertia::render('Siswa/Kelompok/KelompokIndex', compact('kelompoks', 'users'));
     }
 
     /**
@@ -36,7 +44,9 @@ class KelompokController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $kelompoks = Kelompok::where('id', $id)->first();
+
+        return Inertia::render('Siswa/Kelompok/KelompokShow', compact('kelompoks'));
     }
 
     /**
@@ -61,5 +71,16 @@ class KelompokController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function join(string $kelompok_id)
+    {
+        $users = User::find(Auth::user()->id);
+
+        $users->kelompok_id = $kelompok_id;
+
+        $users->save();
+
+        return to_route('kelompok.index');
     }
 }

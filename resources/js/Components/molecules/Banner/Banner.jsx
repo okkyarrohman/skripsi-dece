@@ -1,11 +1,11 @@
 import Description from "@/Components/atoms/Text/Description";
 import Title from "@/Components/atoms/Text/Title";
 
-export default function BannerReferensi() {
+export default function Banner({ title, desc }) {
     return (
         <div className="w-full bg-gray-50 rounded-xl p-6 flex justify-between items-center">
             <div className="space-y-4">
-                <div className="flex items-center gap-2">
+                <div className="flex md:flex-row flex-col items-center gap-2">
                     <div className="size-8 rounded-xl bg-orange-200 flex items-center justify-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -32,19 +32,17 @@ export default function BannerReferensi() {
                             />
                         </svg>
                     </div>
-                    <Title
-                        size="text-xl"
-                        title="Ciptakan Pengetahuan, Baca Sekarang!"
-                    />
+                    <Title size="text-xl" title={title} />
                 </div>
-                <div className="w-2/5">
-                    <Description
-                        size="text-base"
-                        desc="Berikut merupakan beberapa refrensi bacaan yang dapat digunakan untuk menambah materi yang ada"
-                    />
+                <div className="md:w-2/5 w-full">
+                    <Description size="text-base" desc={desc} />
                 </div>
             </div>
-            <img src="/assets/header-icon.png" alt="Icon" className="w-32" />
+            <img
+                src="/assets/header-icon.png"
+                alt="Icon"
+                className="w-32 md:block hidden"
+            />
         </div>
     );
 }
