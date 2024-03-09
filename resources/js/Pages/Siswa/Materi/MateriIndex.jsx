@@ -1,6 +1,6 @@
 import MateriTitle from "@/Components/atoms/Materi/MateriTitle";
 import Description from "@/Components/atoms/Text/Description";
-import MateriCard from "@/Components/organisms/Materi/MateriCard";
+import CardMateri from "@/Components/organisms/Card/CardMateri";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { formattedDate, formattedNumber } from "@/utils/helper";
 import { usePage } from "@inertiajs/react";
@@ -14,24 +14,17 @@ export default function MateriIndex({ auth }) {
         <AuthenticatedLayout userLogin={auth.user} title="Materi">
             <div className="grid grid-cols-3 gap-x-4 gap-y-4">
                 {materis.map((materi, index) => {
-                    // const formattedIndex = String(index + 1).padStart(2, "0");
-
                     return (
-                        <MateriCard
+                        <CardMateri
                             key={index}
                             uploadDate={formattedDate(materi.created_at)}
-                            seenTime={materi.materi_seens.length}
+                            seenTime={materi.seen_time}
                             materiId={materi.id}
+                            materiNumber={formattedNumber(index)}
+                            materiName={materi.name}
+                            materiDesc={materi.slug}
                             materiFile={materi.file}
-                        >
-                            <MateriTitle
-                                number={formattedNumber(index)}
-                                title={materi.name}
-                            />
-                            <div className=" line-clamp-2">
-                                <Description desc={materi.slug} />
-                            </div>
-                        </MateriCard>
+                        />
                     );
                 })}
             </div>

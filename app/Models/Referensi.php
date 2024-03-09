@@ -15,6 +15,7 @@ class Referensi extends Model
         'name',
         'slug',
         'file',
-        'description'
+        'description',
+        'seen_time'
     ];
 }

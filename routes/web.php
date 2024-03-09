@@ -53,6 +53,9 @@ Route::group(['middleware' => 'role:guru'], function () {
             'absensi-guru' => AbsenGuruController::class,
             'data-siswa-guru' => DataSiswaController::class
         ]);
+        Route::get('/panduan-guru', function () {
+            return Inertia::render('Guru/Panduan');
+        })->name('panduan-guru');
     });
 });
 
@@ -70,6 +73,10 @@ Route::group(['middleware' => 'role:siswa'], function () {
             'absen' => AbsenController::class,
         ]);
         Route::post('/materi/{id}/seen', [MateriController::class, 'markSeen'])->name('materi.markSeen');
+        Route::post('/referensi/{id}/seen', [ReferensiController::class, 'markSeen'])->name('referensi.markSeen');
+        Route::get('/panduan', function () {
+            return Inertia::render('Siswa/Panduan');
+        })->name('panduan');
     });
 });
 
