@@ -13,6 +13,7 @@ use App\Http\Controllers\Siswa\AbsenController;
 use App\Http\Controllers\Siswa\KelompokController;
 use App\Http\Controllers\Siswa\MateriController;
 use App\Http\Controllers\Siswa\ReferensiController;
+use App\Http\Controllers\Siswa\TugasAnswerController;
 use App\Http\Controllers\Siswa\TugasController;
 use App\Http\Controllers\Siswa\TutorialController;
 use Illuminate\Foundation\Application;
@@ -67,6 +68,7 @@ Route::group(['middleware' => 'role:siswa'], function () {
         Route::resources([
             'materi' => MateriController::class,
             'tugas' => TugasController::class,
+            'tugas-answer' => TugasAnswerController::class,
             'referensi' => ReferensiController::class,
             'tutorial' => TutorialController::class,
             'kelompok' => KelompokController::class,

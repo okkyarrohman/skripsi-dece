@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kelompok;
+use App\Models\Tugas;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,9 +45,13 @@ class KelompokController extends Controller
      */
     public function show(string $id)
     {
-        $kelompoks = Kelompok::where('id', $id)->first();
+        $kelompoks = Kelompok::where('id', $id)->with(['members'])->first();
 
-        return Inertia::render('Siswa/Kelompok/KelompokShow', compact('kelompoks'));
+        $users = User::where('id', Auth::user()->id)->with(['kelompoks'])->first();
+
+        $tugases = Tugas::all();
+
+        return Inertia::render('Siswa/Kelompok/KelompokShow', compact('kelompoks', 'users', 'tugases'));
     }
 
     /**

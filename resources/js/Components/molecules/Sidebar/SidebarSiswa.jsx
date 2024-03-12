@@ -66,7 +66,10 @@ export default function SidebarSiswa({ url }) {
                 </SidebarLink>
                 <SidebarLink
                     link={route("kelompok.index")}
-                    active={url.startsWith("/siswa/kelompok")}
+                    active={
+                        url.startsWith("/siswa/kelompok") ||
+                        url.startsWith("/siswa/tugas")
+                    }
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

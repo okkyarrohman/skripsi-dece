@@ -13,7 +13,7 @@ export default function MateriShow({ auth }) {
     return (
         <AuthenticatedLayout back userLogin={auth.user}>
             <div className="p-6 bg-gray-50 rounded-xl space-y-4">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 items-center justify-between">
                     <Title title={materi.name} />
                     <a
                         href={"/storage/materi/" + materi.file}

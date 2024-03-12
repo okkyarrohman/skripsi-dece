@@ -3,7 +3,7 @@ export default function PdfViewer({ src }) {
         <embed
             src={src}
             type="application/pdf"
-            className="w-full h-[45rem] rounded-lg"
+            className="w-full h-96 md:h-[45rem] rounded-lg"
         />
     );
 }
