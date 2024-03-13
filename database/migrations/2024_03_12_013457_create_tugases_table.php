@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('tugases', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('kelompok_id');
+            $table->string('is_active');
             $table->string('name');
             $table->longText('description');
             $table->date('deadline_date');
@@ -21,6 +23,8 @@ return new class extends Migration
             $table->longText('question_2');
             $table->longText('question_3');
             $table->timestamps();
+
+            $table->foreign('kelompok_id')->references('id')->on('kelompoks');
         });
     }
 

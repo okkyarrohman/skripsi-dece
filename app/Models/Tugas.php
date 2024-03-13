@@ -12,6 +12,8 @@ class Tugas extends Model
     protected $table = 'tugases';
 
     protected $fillable = [
+        'kelompok_id',
+        'is_active',
         'name',
         'description',
         'deadline_date',
@@ -20,4 +22,8 @@ class Tugas extends Model
         'question_2',
         'question_3'
     ];
+
+    public function answers() {
+        return $this->hasMany(TugasAnswer::class, 'tugas_id', 'id');
+    }
 }

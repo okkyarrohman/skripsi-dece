@@ -13,6 +13,13 @@ import { usePage } from "@inertiajs/react";
 export default function KelompokShow({ auth }) {
     const { kelompoks: kelompok, users: user, tugases } = usePage().props;
 
+    const filteredTugases = tugases.filter(
+        (tugas) => tugas.is_active == "Y" && tugas.kelompok_id == kelompok.id
+    );
+
+    console.log(filteredTugases);
+    console.log(tugases);
+
     const tableTitle = ["Nomor Absen", "Nama Anggota", "Waktu Belajar"];
 
     return (
@@ -110,11 +117,24 @@ export default function KelompokShow({ auth }) {
                     </IconTitle>
 
                     <div className="grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4">
-                        {tugases.map((tugas, index) => {
+                        {filteredTugases.map((tugas, index) => {
+                            const answeredTugas = tugas.answers.find(
+                                (answer) =>
+                                    answer.tugas_id == tugas.id &&
+                                    answer.kelompok_id == tugas.kelompok_id
+                            );
+
+                            console.log("terjawab", answeredTugas);
+
                             return (
                                 <CardTugas
                                     key={index}
-                                    tugasId={tugas.id}
+                                    answered={answeredTugas}
+                                    tugasId={
+                                        answeredTugas
+                                            ? answeredTugas.id
+                                            : tugas.id
+                                    }
                                     tugasName={tugas.name}
                                     tugasDesc={tugas.description}
                                     deadline={`${formattedDate(

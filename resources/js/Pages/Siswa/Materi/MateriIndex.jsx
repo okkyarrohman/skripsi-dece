@@ -18,7 +18,7 @@ export default function MateriIndex({ auth }) {
                             uploadDate={formattedDate(materi.created_at)}
                             seenTime={materi.seen_time}
                             materiId={materi.id}
-                            materiNumber={formattedNumber(index)}
+                            materiNumber={formattedNumber(index + 1)}
                             materiName={materi.name}
                             materiDesc={materi.slug}
                             materiFile={materi.file}

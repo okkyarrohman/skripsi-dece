@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         Kelompok::factory(5)->create();
         User::factory(5)->create();
         Materi::factory(5)->create();
-        Tugas::factory(5)->create();
+        Tugas::factory(10)->create();
         Referensi::factory(5)->create();
     }
 }

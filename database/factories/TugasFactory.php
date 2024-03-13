@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Kelompok;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,8 @@ class TugasFactory extends Factory
     public function definition(): array
     {
         return [
+            'kelompok_id' => Kelompok::inRandomOrder()->first()->id,
+            'is_active' => $this->faker->randomElement(['Y', 'N']),
             'name' => $this->faker->name(),
             'description' => $this->faker->paragraph(),
             'deadline_date' => $this->faker->date(),

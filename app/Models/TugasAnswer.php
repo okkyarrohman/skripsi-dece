@@ -18,4 +18,8 @@ class TugasAnswer extends Model
         'answer_2',
         'answer_3'
     ];
+
+    public function tugas() {
+        return $this->belongsTo(Tugas::class, 'tugas_id', 'id');
+    }
 }

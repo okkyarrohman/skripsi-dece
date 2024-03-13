@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use App\Models\TugasAnswer;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TugasAnswerController extends Controller
 {
@@ -63,7 +64,9 @@ class TugasAnswerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $answers = TugasAnswer::where('id', $id)->with(['tugas'])->first();
+
+        return Inertia::render('Siswa/TugasAnswer/TugasAnswerShow', compact('answers'));
     }
 
     /**

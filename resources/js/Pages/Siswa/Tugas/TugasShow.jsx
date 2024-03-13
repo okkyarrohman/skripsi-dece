@@ -10,6 +10,8 @@ import { useForm, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
 export default function TugasShow({ auth }) {
+    const [isDisabled, setIsDisabled] = useState(true);
+
     const { tugases: tugas } = usePage().props;
 
     const { data, setData, post } = useForm({
@@ -38,6 +40,14 @@ export default function TugasShow({ auth }) {
     const handleNextOnClick = () => {
         step == 3 ? setStep(step) : setStep(step + 1);
     };
+
+    useEffect(() => {
+        const isAllAnswersFilled =
+            data.answer_1 !== "" &&
+            data.answer_2 !== null &&
+            data.answer_3 !== null;
+        setIsDisabled(!isAllAnswersFilled);
+    }, [data.answer_1, data.answer_2, data.answer_3]);
 
     return (
         <AuthenticatedLayout back userLogin={auth.user}>
@@ -123,7 +133,11 @@ export default function TugasShow({ auth }) {
                         {/* Submit Button */}
                         {step == 3 && (
                             <div className="w-full md:w-40">
-                                <PrimaryButton full type="submit">
+                                <PrimaryButton
+                                    full
+                                    type="submit"
+                                    disabled={isDisabled}
+                                >
                                     Kirim
                                 </PrimaryButton>
                             </div>

@@ -49,7 +49,7 @@ class KelompokController extends Controller
 
         $users = User::where('id', Auth::user()->id)->with(['kelompoks'])->first();
 
-        $tugases = Tugas::all();
+        $tugases = Tugas::with(['answers'])->get();
 
         return Inertia::render('Siswa/Kelompok/KelompokShow', compact('kelompoks', 'users', 'tugases'));
     }

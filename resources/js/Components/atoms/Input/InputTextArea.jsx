@@ -3,6 +3,7 @@ export default function InputTextArea({
     placeholder,
     icon = false,
     value,
+    disabled = false,
     onChange,
     children,
 }) {
@@ -17,6 +18,7 @@ export default function InputTextArea({
                 id={name}
                 name={name}
                 rows="7"
+                disabled={disabled}
                 className={`bg-gray-50 border border-gray-400 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full ${
                     icon ? "ps-12" : "px-3"
                 } pe-3 py-2.5`}

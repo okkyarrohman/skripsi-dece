@@ -9,6 +9,7 @@ export default function CardTugas({
     tugasDesc,
     grade,
     deadline,
+    answered = false,
     tugasId,
 }) {
     return (
@@ -25,7 +26,14 @@ export default function CardTugas({
                 Nilai: <span className="font-normal">{grade}</span>
             </p>
             <div className="flex justify-between gap-4">
-                <Link href={route("tugas.show", tugasId)} className="w-full">
+                <Link
+                    href={
+                        answered
+                            ? route("tugas-answer.show", tugasId)
+                            : route("tugas.show", tugasId)
+                    }
+                    className="w-full"
+                >
                     <PrimaryButton full style="small" size="text-sm">
                         Lihat
                         <svg
