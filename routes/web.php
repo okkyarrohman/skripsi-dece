@@ -30,13 +30,13 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('landing');
 
 // Route Guru
 Route::group(['middleware' => 'role:guru'], function () {
@@ -67,6 +67,7 @@ Route::group(['middleware' => 'role:siswa'], function () {
             'kelompok' => KelompokController::class,
             'absen' => AbsenController::class,
         ]);
+        Route::post('/materi/{id}/seen', [MateriController::class, 'markSeen'])->name('materi.markSeen');
     });
 });
 

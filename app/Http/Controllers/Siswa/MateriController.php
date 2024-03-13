@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Materi;
+use App\Models\MateriSeen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class MateriController extends Controller
 {
@@ -12,7 +17,9 @@ class MateriController extends Controller
      */
     public function index()
     {
-        //
+        $materis = Materi::with(['materi_seens'])->get();
+
+        return Inertia::render('Siswa/Materi/MateriIndex', compact('materis'));
     }
 
     /**
@@ -36,7 +43,9 @@ class MateriController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $materis = Materi::where('id', $id)->with(['materi_seens'])->first();
+
+        return Inertia::render('Siswa/Materi/MateriShow', compact('materis'));
     }
 
     /**
@@ -61,5 +70,16 @@ class MateriController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function markSeen(string $id)
+    {
+        MateriSeen::create([
+            'materi_id' => $id,
+            // 'user_id' => Auth::user()->id,
+            'is_seen' => 'Y'
+        ]);
+
+        return to_route('materi.show', $id);
     }
 }
