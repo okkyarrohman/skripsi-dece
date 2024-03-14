@@ -1,9 +1,55 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
+import TableBody from "@/Components/atoms/Table/TableBody";
+import TableContainer from "@/Components/atoms/Table/TableContainer";
+import TableData from "@/Components/atoms/Table/TableData";
+import TableHead from "@/Components/atoms/Table/TableHead";
+import TableRow from "@/Components/atoms/Table/TableRow";
+import ActionButton from "@/Components/molecules/Button/ActionButton";
+import { Link, usePage } from "@inertiajs/react";
+import { formattedDate } from "@/utils/helper";
 
 export default function ReferensiIndex({ auth }) {
+    const { referensis } = usePage().props;
+
+    const tableTitle = ["Nomor", "Judul Referensi", "Tanggal Dibuat", "Action"];
+
     return (
         <AuthenticatedLayout title="Referensi" userLogin={auth.user}>
-            Referensi
+            <div className="p-6 rounded-xl bg-gray-50 space-y-6">
+                <Link href="">
+                    <PrimaryButton className="ml-auto">
+                        Tambah Referensi
+                    </PrimaryButton>
+                </Link>
+
+                <TableContainer>
+                    <TableHead datas={tableTitle} />
+                    <TableBody>
+                        {referensis.map((referensi, index) => {
+                            return (
+                                <TableRow key={index}>
+                                    <TableData children={index + 1} />
+                                    <TableData
+                                        children={referensi.name}
+                                        align="text-left"
+                                        nowrap
+                                    />
+                                    <TableData
+                                        children={formattedDate(
+                                            referensi.created_at
+                                        )}
+                                    />
+                                    <TableData
+                                        children={<ActionButton />}
+                                        nowrap
+                                    />
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </TableContainer>
+            </div>
         </AuthenticatedLayout>
     );
 }

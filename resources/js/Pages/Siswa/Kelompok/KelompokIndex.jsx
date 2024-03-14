@@ -4,7 +4,6 @@ import TableContainer from "@/Components/atoms/Table/TableContainer";
 import TableData from "@/Components/atoms/Table/TableData";
 import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
-import Title from "@/Components/atoms/Text/Title";
 import Banner from "@/Components/molecules/Banner/Banner";
 import BannerJoined from "@/Components/molecules/Banner/BannerJoinned";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
