@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TugasGuruController extends Controller
 {
@@ -12,7 +14,9 @@ class TugasGuruController extends Controller
      */
     public function index()
     {
-        //
+        $tugases = Tugas::all();
+
+        return Inertia::render('Guru/Tugas/TugasIndex', compact('tugases'));
     }
 
     /**

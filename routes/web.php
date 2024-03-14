@@ -6,6 +6,7 @@ use App\Http\Controllers\Guru\DataSiswaController;
 use App\Http\Controllers\Guru\KelompokGuruController;
 use App\Http\Controllers\Guru\MateriGuruController;
 use App\Http\Controllers\Guru\ReferensiGuruController;
+use App\Http\Controllers\Guru\TugasAnswerGuruController;
 use App\Http\Controllers\Guru\TugasGuruController;
 use App\Http\Controllers\Guru\TutorialGuruController;
 use App\Http\Controllers\ProfileController;
@@ -16,7 +17,6 @@ use App\Http\Controllers\Siswa\ReferensiController;
 use App\Http\Controllers\Siswa\TugasAnswerController;
 use App\Http\Controllers\Siswa\TugasController;
 use App\Http\Controllers\Siswa\TutorialController;
-use App\Http\Controllers\TugasAnswerGuruController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -53,7 +53,7 @@ Route::group(['middleware' => 'role:guru'], function () {
             'referensi-guru' => ReferensiGuruController::class,
             'tutorial-guru' => TutorialGuruController::class,
             'kelompok-guru' => KelompokGuruController::class,
-            'absensi-guru' => AbsenGuruController::class,
+            'absen-guru' => AbsenGuruController::class,
             'data-siswa-guru' => DataSiswaController::class
         ]);
         Route::get('/panduan-guru', function () {

@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Guru;
 
+use App\Http\Controllers\Controller;
+use App\Models\TugasAnswer;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TugasAnswerGuruController extends Controller
 {
@@ -11,7 +14,9 @@ class TugasAnswerGuruController extends Controller
      */
     public function index()
     {
-        //
+        $answers = TugasAnswer::all();
+
+        return Inertia::render('Guru/HasilTugas/HasilTugasIndex', compact('answers'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AbsenGuruController extends Controller
 {
@@ -12,7 +13,7 @@ class AbsenGuruController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Guru/Absen/AbsenIndex');
     }
 
     /**

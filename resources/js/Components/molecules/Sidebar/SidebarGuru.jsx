@@ -34,7 +34,10 @@ export default function SidebarGuru({ url }) {
                     </svg>
                     Dashboard
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("absen-guru.index")}
+                    active={url.startsWith("/guru/absen")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -61,7 +64,10 @@ export default function SidebarGuru({ url }) {
                     </svg>
                     Absen
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("data-siswa-guru.index")}
+                    active={url.startsWith("/guru/data-siswa")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -94,7 +100,7 @@ export default function SidebarGuru({ url }) {
                 </SidebarLink>
                 <SidebarLink
                     link={route("materi-guru.index")}
-                    active={url.startsWith("/guru/materi-guru")}
+                    active={url.startsWith("/guru/materi")}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +128,10 @@ export default function SidebarGuru({ url }) {
                     </svg>
                     Materi
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("kelompok-guru.index")}
+                    active={url.startsWith("/guru/kelompok")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -157,7 +166,10 @@ export default function SidebarGuru({ url }) {
                     </svg>
                     Kelompok
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("tugas-guru.index")}
+                    active={url.startsWith("/guru/tugas-guru")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -180,7 +192,10 @@ export default function SidebarGuru({ url }) {
                     </svg>
                     Tugas Kelompok
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("tugas-answer-guru.index")}
+                    active={url.startsWith("/guru/tugas-answer")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -221,7 +236,7 @@ export default function SidebarGuru({ url }) {
                 </SidebarLink>
                 <SidebarLink
                     link={route("referensi-guru.index")}
-                    active={url.startsWith("/guru/referensi-guru")}
+                    active={url.startsWith("/guru/referensi")}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
