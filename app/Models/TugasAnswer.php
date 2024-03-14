@@ -16,7 +16,10 @@ class TugasAnswer extends Model
         'kelompok_id',
         'answer_1',
         'answer_2',
-        'answer_3'
+        'answer_3',
+        'grade',
+        'grade_category',
+        'feedback'
     ];
 
     public function tugas() {

@@ -16,6 +16,7 @@ use App\Http\Controllers\Siswa\ReferensiController;
 use App\Http\Controllers\Siswa\TugasAnswerController;
 use App\Http\Controllers\Siswa\TugasController;
 use App\Http\Controllers\Siswa\TutorialController;
+use App\Http\Controllers\TugasAnswerGuruController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,7 @@ Route::group(['middleware' => 'role:guru'], function () {
         Route::resources([
             'materi-guru' => MateriGuruController::class,
             'tugas-guru' => TugasGuruController::class,
+            'tugas-answer-guru' => TugasAnswerGuruController::class,
             'referensi-guru' => ReferensiGuruController::class,
             'tutorial-guru' => TutorialGuruController::class,
             'kelompok-guru' => KelompokGuruController::class,

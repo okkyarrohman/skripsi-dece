@@ -18,6 +18,9 @@ return new class extends Migration
             $table->longText('answer_1');
             $table->string('answer_2');
             $table->string('answer_3');
+            $table->integer('grade')->nullable();
+            $table->string('grade_category')->nullable();
+            $table->longText('feedback')->nullable();
             $table->timestamps();
 
             $table->foreign('tugas_id')->references('id')->on('tugases');
