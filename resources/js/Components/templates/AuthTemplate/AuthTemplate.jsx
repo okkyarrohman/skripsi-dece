@@ -4,14 +4,14 @@ import { Link } from "@inertiajs/react";
 
 export default function AuthTemplate({ title, desc, children }) {
     return (
-        <section className="grid grid-cols-2 bg-gray-50">
+        <section className="grid md:grid-cols-2 grid-cols-1 bg-gray-50">
             {/* Left */}
-            <div className="bg-orange-500 w-1/2 h-screen flex items-center justify-center fixed left-0">
+            <div className="bg-orange-500 w-1/2 h-screen md:flex hidden items-center justify-center fixed left-0">
                 <AuthHero />
             </div>
 
             {/* Empty Space */}
-            <div></div>
+            <div className="md:block hidden"></div>
 
             {/* Right */}
             <div className="bg-gray-50 w-full min-h-screen flex justify-center items-center">

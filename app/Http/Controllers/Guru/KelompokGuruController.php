@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelompok;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class KelompokGuruController extends Controller
 {
@@ -12,7 +14,9 @@ class KelompokGuruController extends Controller
      */
     public function index()
     {
-        //
+        $kelompoks = Kelompok::all();
+
+        return Inertia::render('Guru/Kelompok/KelompokIndex', compact('kelompoks'));
     }
 
     /**

@@ -5,6 +5,7 @@ export default function InputText({
     autoFocus = false,
     type = "text",
     value,
+    disabled = false,
     onChange,
     children,
 }) {
@@ -21,6 +22,7 @@ export default function InputText({
                 name={name}
                 autoFocus={autoFocus}
                 value={value}
+                disabled={disabled}
                 className={`bg-gray-50 border border-gray-400 rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full ${
                     icon ? "ps-12" : "px-3"
                 } pe-3 py-2.5`}

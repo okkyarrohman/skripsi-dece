@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Referensi;
+use App\Models\ReferensiSeen;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ReferensiController extends Controller
 {
@@ -12,7 +15,9 @@ class ReferensiController extends Controller
      */
     public function index()
     {
-        //
+        $referensis = Referensi::all();
+
+        return Inertia::render('Siswa/Referensi/ReferensiIndex', compact('referensis'));
     }
 
     /**
@@ -36,7 +41,9 @@ class ReferensiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $referensis = Referensi::where('id', $id)->first();
+
+        return Inertia::render('Siswa/Referensi/ReferensiShow', compact('referensis'));
     }
 
     /**
@@ -61,5 +68,16 @@ class ReferensiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function markSeen(string $id)
+    {
+        $referensis = Referensi::find($id);
+
+        $referensis->seen_time += 1;
+
+        $referensis->save();
+
+        return to_route('referensi.show', $id);
     }
 }

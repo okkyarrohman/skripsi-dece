@@ -17,7 +17,7 @@ class MateriController extends Controller
      */
     public function index()
     {
-        $materis = Materi::with(['materi_seens'])->get();
+        $materis = Materi::all();
 
         return Inertia::render('Siswa/Materi/MateriIndex', compact('materis'));
     }
@@ -43,7 +43,7 @@ class MateriController extends Controller
      */
     public function show(string $id)
     {
-        $materis = Materi::where('id', $id)->with(['materi_seens'])->first();
+        $materis = Materi::where('id', $id)->first();
 
         return Inertia::render('Siswa/Materi/MateriShow', compact('materis'));
     }
@@ -74,11 +74,11 @@ class MateriController extends Controller
 
     public function markSeen(string $id)
     {
-        MateriSeen::create([
-            'materi_id' => $id,
-            // 'user_id' => Auth::user()->id,
-            'is_seen' => 'Y'
-        ]);
+        $materis = Materi::find($id);
+
+        $materis->seen_time += 1;
+
+        $materis->save();
 
         return to_route('materi.show', $id);
     }

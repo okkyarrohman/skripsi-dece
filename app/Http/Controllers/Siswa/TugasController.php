@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TugasController extends Controller
 {
@@ -36,7 +38,9 @@ class TugasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $tugases = Tugas::where('id', $id)->first();
+
+        return Inertia::render('Siswa/Tugas/TugasShow', compact('tugases'));
     }
 
     /**

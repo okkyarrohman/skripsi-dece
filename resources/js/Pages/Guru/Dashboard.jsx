@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 export default function Dashboard({ auth }) {
     return (
-        <AuthenticatedLayout userLogin={auth.user}>
+        <AuthenticatedLayout title="Dashboard" userLogin={auth.user}>
             Dashboard
         </AuthenticatedLayout>
     );

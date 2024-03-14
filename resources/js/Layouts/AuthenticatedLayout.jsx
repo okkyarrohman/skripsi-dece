@@ -15,7 +15,7 @@ export default function AuthenticatedLayout({
             <UserNavbar userLogin={userLogin}>
                 {back ? <BackButton /> : <Title title={title} />}
             </UserNavbar>
-            <div className="pl-72 pt-24">
+            <div className="md:pl-72 md:pt-24">
                 <div className="p-8 w-full h-full">{children}</div>
             </div>
         </>

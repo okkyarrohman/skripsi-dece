@@ -3,7 +3,7 @@ import SidebarLink from "@/Components/atoms/Sidebar/SidebarLink";
 export default function SidebarSiswa({ url }) {
     return (
         <>
-            <ul className="max-h-[55%] w-full flex flex-col justify-start gap-6 overflow-y-auto pr-1">
+            <ul className="md:max-h-[55%] h-full w-full flex flex-col justify-start md:gap-6 gap-2 overflow-y-auto md:pr-1 pr-0">
                 <SidebarLink
                     link={route("dashboard.siswa")}
                     active={url == "/siswa/dashboard"}
@@ -36,7 +36,7 @@ export default function SidebarSiswa({ url }) {
                 </SidebarLink>
                 <SidebarLink
                     link={route("materi.index")}
-                    active={url == "/siswa/materi"}
+                    active={url.startsWith("/siswa/materi")}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,13 @@ export default function SidebarSiswa({ url }) {
                     </svg>
                     Materi
                 </SidebarLink>
-                <SidebarLink>
+                <SidebarLink
+                    link={route("kelompok.index")}
+                    active={
+                        url.startsWith("/siswa/kelompok") ||
+                        url.startsWith("/siswa/tugas")
+                    }
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -101,7 +107,7 @@ export default function SidebarSiswa({ url }) {
                 </SidebarLink>
                 <SidebarLink
                     link={route("referensi.index")}
-                    active={url == "/siswa/referensi"}
+                    active={url.startsWith("/siswa/referensi")}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +138,7 @@ export default function SidebarSiswa({ url }) {
             </ul>
 
             {/* Bottom Menu */}
-            <ul className="h-1/4 w-full flex flex-col justify-end gap-6">
+            <ul className="h-1/4 w-full flex flex-col justify-end md:gap-6 gap-2 md:mt-0 mt-10">
                 <SidebarLink>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
