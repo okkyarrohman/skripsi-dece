@@ -16,14 +16,10 @@ export default function TugasShow({ auth }) {
 
     const { data, setData, post } = useForm({
         tugas_id: tugas.id,
-        kelompok_id: auth.user.kelompok_id,
+        // kelompok_id: auth.user.kelompok_id,
         answer_1: "",
         answer_2: null,
         answer_3: null,
-    });
-
-    useEffect(() => {
-        console.log(data);
     });
 
     const handleOnSubmit = (e) => {

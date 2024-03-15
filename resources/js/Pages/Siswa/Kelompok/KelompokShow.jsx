@@ -18,7 +18,6 @@ export default function KelompokShow({ auth }) {
     );
 
     console.log(filteredTugases);
-    console.log(tugases);
 
     const tableTitle = ["Nomor Absen", "Nama Anggota", "Waktu Belajar"];
 
@@ -69,8 +68,6 @@ export default function KelompokShow({ auth }) {
                         <TableHead datas={tableTitle} />
                         <TableBody>
                             {kelompok.members.map((member, index) => {
-                                console.log(member);
-
                                 return (
                                     <TableRow key={index}>
                                         <TableData children={member.absen} />
@@ -121,10 +118,8 @@ export default function KelompokShow({ auth }) {
                             const answeredTugas = tugas.answers.find(
                                 (answer) =>
                                     answer.tugas_id == tugas.id &&
-                                    answer.kelompok_id == tugas.kelompok_id
+                                    answer.user_id == auth.user.id
                             );
-
-                            console.log("terjawab", answeredTugas);
 
                             return (
                                 <CardTugas

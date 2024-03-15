@@ -14,7 +14,7 @@ class KelompokGuruController extends Controller
      */
     public function index()
     {
-        $kelompoks = Kelompok::all();
+        $kelompoks = Kelompok::with(['members'])->get();
 
         return Inertia::render('Guru/Kelompok/KelompokIndex', compact('kelompoks'));
     }

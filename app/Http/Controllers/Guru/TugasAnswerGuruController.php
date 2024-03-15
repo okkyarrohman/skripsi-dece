@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelompok;
 use App\Models\TugasAnswer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,9 +15,10 @@ class TugasAnswerGuruController extends Controller
      */
     public function index()
     {
+        $kelompoks = Kelompok::with(['tugases.answers'])->get();
         $answers = TugasAnswer::all();
 
-        return Inertia::render('Guru/HasilTugas/HasilTugasIndex', compact('answers'));
+        return Inertia::render('Guru/HasilTugas/HasilTugasIndex', compact('kelompoks', 'answers'));
     }
 
     /**

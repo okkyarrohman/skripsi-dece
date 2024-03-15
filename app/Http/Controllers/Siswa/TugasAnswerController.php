@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use App\Models\TugasAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TugasAnswerController extends Controller
@@ -50,13 +51,14 @@ class TugasAnswerController extends Controller
 
         TugasAnswer::create([
             'tugas_id' => $request->input('tugas_id'),
-            'kelompok_id' => $request->input('kelompok_id'),
+            // 'kelompok_id' => $request->input('kelompok_id'),
+            'user_id' => Auth::user()->id,
             'answer_1' => $request->input('answer_1'),
             'answer_2' => $fileAnswer2,
             'answer_3' => $fileAnswer3
         ]);
 
-        return to_route('kelompok.show', $request->input('kelompok_id'));
+        return to_route('kelompok.show', Auth::user()->kelompok_id);
     }
 
     /**

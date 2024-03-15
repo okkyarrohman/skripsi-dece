@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('tugas_answers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tugas_id');
-            $table->unsignedBigInteger('kelompok_id');
+            // $table->unsignedBigInteger('kelompok_id');
+            $table->unsignedBigInteger('user_id');
             $table->longText('answer_1');
             $table->string('answer_2');
             $table->string('answer_3');
@@ -24,7 +25,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('tugas_id')->references('id')->on('tugases');
-            $table->foreign('kelompok_id')->references('id')->on('kelompoks');
+            // $table->foreign('kelompok_id')->references('id')->on('kelompoks');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
