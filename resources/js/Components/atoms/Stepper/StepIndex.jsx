@@ -5,7 +5,7 @@ export default function StepIndex({ number, step, active = false }) {
         <div
             className={`${
                 active && "bg-orange-500"
-            } flex gap-2 p-3 rounded-xl max-w-60`}
+            } flex gap-2 p-3 rounded-xl w-fit max-w-60`}
         >
             <span
                 className={`${
