@@ -73,7 +73,7 @@ export default function MateriCreate({ auth }) {
                         <InputError message={errors.slug} className="mt-2" />
                     </div>
                     <div>
-                        <Label htmlFor="slug" text="Deskripsi Materi" />
+                        <Label htmlFor="description" text="Deskripsi Materi" />
                         <InputTextArea
                             name="description"
                             placeholder="Deskripsi Materi..."

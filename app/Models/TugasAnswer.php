@@ -26,4 +26,8 @@ class TugasAnswer extends Model
     public function tugas() {
         return $this->belongsTo(Tugas::class, 'tugas_id', 'id');
     }
+
+    public function users() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

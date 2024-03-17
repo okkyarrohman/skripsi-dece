@@ -25,7 +25,7 @@ export default function TugasIndex({ auth }) {
     return (
         <AuthenticatedLayout title="Tugas Kelompok" userLogin={auth.user}>
             <div className="p-6 rounded-xl bg-gray-50 space-y-6">
-                <Link href="">
+                <Link href={route("tugas-guru.create")}>
                     <PrimaryButton className="ml-auto">
                         Tambah Tugas Kelompok
                     </PrimaryButton>
@@ -55,7 +55,20 @@ export default function TugasIndex({ auth }) {
                                             />
                                         }
                                     />
-                                    <TableData children={<ActionButton />} />
+                                    <TableData
+                                        children={
+                                            <ActionButton
+                                                onEdit={route(
+                                                    "tugas-guru.edit",
+                                                    tugas.id
+                                                )}
+                                                onDelete={route(
+                                                    "tugas-guru.destroy",
+                                                    tugas.id
+                                                )}
+                                            />
+                                        }
+                                    />
                                 </TableRow>
                             );
                         })}
