@@ -5,19 +5,11 @@ import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
 import Banner from "@/Components/molecules/Banner/Banner";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
-import CardTugas from "@/Components/organisms/Card/CardTugas";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { formattedDate } from "@/utils/helper";
 import { usePage } from "@inertiajs/react";
 
 export default function KelompokShow({ auth }) {
-    const { kelompoks: kelompok, users: user, tugases } = usePage().props;
-
-    const filteredTugases = tugases.filter(
-        (tugas) => tugas.is_active == "Y" && tugas.kelompok_id == kelompok.id
-    );
-
-    console.log(filteredTugases);
+    const { kelompoks: kelompok } = usePage().props;
 
     const tableTitle = ["Nomor Absen", "Nama Anggota", "Waktu Belajar"];
 
@@ -25,8 +17,8 @@ export default function KelompokShow({ auth }) {
         <AuthenticatedLayout back userLogin={auth.user}>
             <div className="space-y-5">
                 <Banner
-                    title={`Selamat Datang Di ${kelompok.name}, ${auth.user.name}`}
-                    desc="Segera kerjakan tugas-tugas yang telah diberikan bersama anggota kelompok anda!"
+                    title={`Kelompok ${kelompok.name}`}
+                    desc="Setiap kemajuan murid, sekecil apapun, patut untuk dirayakan dan diapresiasi!"
                 />
                 <div className="bg-gray-50 p-6 rounded-xl space-y-4">
                     <IconTitle title={`Anggota Kelompok ${kelompok.name}`}>
@@ -84,62 +76,6 @@ export default function KelompokShow({ auth }) {
                             })}
                         </TableBody>
                     </TableContainer>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-xl space-y-4">
-                    <IconTitle title="Tugas Kelompok">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="18"
-                            height="18"
-                            viewBox="0 0 18 18"
-                            fill="none"
-                        >
-                            <path
-                                d="M15.1822 7.6839H13.0804C11.3568 7.6839 9.95313 6.28027 9.95313 4.55663V2.45481C9.95313 2.05481 9.62585 1.72754 9.22585 1.72754H6.14222C3.90222 1.72754 2.09131 3.18208 2.09131 5.77845V12.2221C2.09131 14.8184 3.90222 16.273 6.14222 16.273H11.8586C14.0986 16.273 15.9095 14.8184 15.9095 12.2221V8.41117C15.9095 8.01117 15.5822 7.6839 15.1822 7.6839Z"
-                                fill="#FB8A3C"
-                            />
-                            <path
-                                d="M11.7638 1.88048C11.4656 1.5823 10.9492 1.78594 10.9492 2.20048V4.73866C10.9492 5.80048 11.851 6.68048 12.9492 6.68048C13.6401 6.68776 14.6001 6.68776 15.4219 6.68776C15.8365 6.68776 16.0547 6.20048 15.7638 5.90957C14.7165 4.85503 12.8401 2.95685 11.7638 1.88048Z"
-                                fill="#FB8A3C"
-                            />
-                            <path
-                                d="M10.0912 10.273H5.72758C5.4294 10.273 5.18213 10.0258 5.18213 9.72758C5.18213 9.4294 5.4294 9.18213 5.72758 9.18213H10.0912C10.3894 9.18213 10.6367 9.4294 10.6367 9.72758C10.6367 10.0258 10.3894 10.273 10.0912 10.273Z"
-                                fill="white"
-                            />
-                            <path
-                                d="M8.63667 13.1822H5.72758C5.4294 13.1822 5.18213 12.9349 5.18213 12.6368C5.18213 12.3386 5.4294 12.0913 5.72758 12.0913H8.63667C8.93486 12.0913 9.18213 12.3386 9.18213 12.6368C9.18213 12.9349 8.93486 13.1822 8.63667 13.1822Z"
-                                fill="white"
-                            />
-                        </svg>
-                    </IconTitle>
-
-                    <div className="grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4">
-                        {filteredTugases.map((tugas, index) => {
-                            const answeredTugas = tugas.answers.find(
-                                (answer) =>
-                                    answer.tugas_id == tugas.id &&
-                                    answer.user_id == auth.user.id
-                            );
-
-                            return (
-                                <CardTugas
-                                    key={index}
-                                    answered={answeredTugas}
-                                    tugasId={
-                                        answeredTugas
-                                            ? answeredTugas.id
-                                            : tugas.id
-                                    }
-                                    tugasName={tugas.name}
-                                    tugasDesc={tugas.description}
-                                    deadline={`${formattedDate(
-                                        tugas.deadline_date
-                                    )}, ${tugas.deadline_time} `}
-                                    grade={80}
-                                />
-                            );
-                        })}
-                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>

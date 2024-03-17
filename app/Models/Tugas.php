@@ -26,4 +26,8 @@ class Tugas extends Model
     public function answers() {
         return $this->hasMany(TugasAnswer::class, 'tugas_id', 'id');
     }
+
+    public function kelompoks() {
+        return $this->belongsTo(Kelompok::class, 'kelompok_id', 'id');
+    }
 }

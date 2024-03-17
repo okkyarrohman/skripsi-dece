@@ -1,33 +1,49 @@
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
+import DropdownContainer from "@/Components/atoms/Dropdown/DropdownContainer";
+import DropdownOption from "@/Components/atoms/Dropdown/DropdownOption";
 import InputFile from "@/Components/atoms/Input/InputFile";
 import InputText from "@/Components/atoms/Input/InputText";
 import InputTextArea from "@/Components/atoms/Input/InputTextArea";
 import Label from "@/Components/atoms/Label/Label";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useForm, usePage } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
+import { useState } from "react";
 
-export default function MateriEdit({ auth }) {
-    const { materis } = usePage().props;
+export default function KelompokCreate({ auth }) {
+    const [open, setOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("");
 
     const { data, setData, post, errors } = useForm({
-        _method: "patch",
-        name: materis.name,
-        slug: materis.slug,
-        file: materis.file,
-        description: materis.description,
+        name: "",
+        capacity: "",
+        is_active: "",
     });
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        post(route("materi-guru.update", materis.id));
+        post(route("kelompok-guru.store"));
+    };
+
+    const handleDropdownOnClick = () => {
+        setOpen(!open);
+    };
+
+    const handleOptionSelect = (option) => {
+        if (option == "Y") {
+            setSelectedOption("Aktif");
+        } else {
+            setSelectedOption("Nonaktif");
+        }
+        setData("is_active", option);
+        setOpen(!open);
     };
 
     return (
         <AuthenticatedLayout back userLogin={auth.user}>
             <div className="p-6 rounded-xl bg-gray-50 space-y-6">
-                <IconTitle title="Edit Materi">
+                <IconTitle title="Tambah Kelompok">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="18"
@@ -55,52 +71,57 @@ export default function MateriEdit({ auth }) {
                 </IconTitle>
                 <form onSubmit={handleOnSubmit} className="space-y-6">
                     <div>
-                        <Label htmlFor="name" text="Nama Materi" />
+                        <Label htmlFor="name" text="Nama Kelompok" />
                         <InputText
                             autoFocus
                             name="name"
-                            placeholder="Nama Materi..."
+                            placeholder="Nama Kelompok..."
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
                         />
                         <InputError message={errors.name} className="mt-2" />
                     </div>
                     <div>
-                        <Label htmlFor="slug" text="Slug Materi" />
+                        <Label htmlFor="capacity" text="Kuota Kelompok" />
                         <InputText
-                            name="slug"
-                            placeholder="Slug Materi..."
-                            value={data.slug}
-                            onChange={(e) => setData("slug", e.target.value)}
-                        />
-                        <InputError message={errors.slug} className="mt-2" />
-                    </div>
-                    <div>
-                        <Label htmlFor="slug" text="Deskripsi Materi" />
-                        <InputTextArea
-                            name="description"
-                            placeholder="Deskripsi Materi..."
-                            value={data.description}
+                            type="number"
+                            name="capacity"
+                            placeholder="Kuota Kelompok..."
+                            value={data.capacity}
                             onChange={(e) =>
-                                setData("description", e.target.value)
+                                setData("capacity", e.target.value)
                             }
                         />
                         <InputError
-                            message={errors.description}
+                            message={errors.capacity}
                             className="mt-2"
                         />
                     </div>
                     <div>
-                        <Label htmlFor="file" text="File Materi" />
-                        <InputFile
-                            name="file"
-                            file={data.file.name ? data.file.name : data.file}
-                            onChange={(e) => setData("file", e.target.files[0])}
+                        <Label htmlFor="is_active" text="Status Kelompok" />
+                        {/* Select Option */}
+                        <DropdownContainer
+                            onClick={handleDropdownOnClick}
+                            opened={open}
+                            selectedOption={selectedOption}
+                            unselectedOption="Pilih Status Kelompok"
+                        >
+                            <DropdownOption
+                                option="Aktif"
+                                onSelect={() => handleOptionSelect("Y")}
+                            />
+                            <DropdownOption
+                                option="Nonaktif"
+                                onSelect={() => handleOptionSelect("N")}
+                            />
+                        </DropdownContainer>
+                        <InputError
+                            message={errors.is_active}
+                            className="mt-2"
                         />
-                        <InputError message={errors.file} className="mt-2" />
                     </div>
                     <PrimaryButton type="submit" className="ml-auto">
-                        Update Materi
+                        Tambah Kelompok
                     </PrimaryButton>
                 </form>
             </div>

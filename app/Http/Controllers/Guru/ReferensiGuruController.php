@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Referensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class ReferensiGuruController extends Controller
@@ -33,6 +34,24 @@ class ReferensiGuruController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'description' => 'required|string',
+            'file' => 'required|file|mimes:pdf|max:2048',
+        ], [
+            'name.required' => 'Nama tidak boleh kosong',
+            'slug.required' => 'Slug tidak boleh kosong',
+            'description.required' => 'Deskripsi tidak boleh kosong',
+            'file.required' => 'File harus diunggah',
+            'file.mimes' => 'File harus berupa format PDF',
+            'file.max' => 'Ukuran file tidak boleh melebihi 2MB',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $extension = $file->getClientOriginalName();
@@ -63,7 +82,7 @@ class ReferensiGuruController extends Controller
      */
     public function edit(string $id)
     {
-        $referensis = Referensi::where('id, $id')->first();
+        $referensis = Referensi::where('id', $id)->first();
 
         return Inertia::render('Guru/Referensi/ReferensiEdit', compact('referensis'));
     }
@@ -75,13 +94,31 @@ class ReferensiGuruController extends Controller
     {
         $referensis = Referensi::find($id);
 
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'description' => 'required|string',
+            'file' => 'required|file|mimes:pdf|max:2048',
+        ], [
+            'name.required' => 'Nama tidak boleh kosong',
+            'slug.required' => 'Slug tidak boleh kosong',
+            'description.required' => 'Deskripsi tidak boleh kosong',
+            'file.required' => 'File harus diunggah',
+            'file.mimes' => 'File harus berupa format PDF',
+            'file.max' => 'Ukuran file tidak boleh melebihi 2MB',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         if ($request->hasFile('file')) {
             Storage::delete("public/referensi/" . $referensis->file);
 
             $file = $request->file('file');
             $extension = $file->getClientOriginalName();
             $fileName = date('YmdHis') . "." . $extension;
-            $file->move(storage_path('app/public/Submateri/file/'), $fileName);
+            $file->move(storage_path('app/public/referensi'), $fileName);
         } else {
             $fileName = $referensis->file;
         }

@@ -4,7 +4,6 @@ import TableContainer from "@/Components/atoms/Table/TableContainer";
 import TableData from "@/Components/atoms/Table/TableData";
 import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
-import Title from "@/Components/atoms/Text/Title";
 import Banner from "@/Components/molecules/Banner/Banner";
 import BannerJoined from "@/Components/molecules/Banner/BannerJoinned";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
@@ -13,6 +12,10 @@ import { Link, usePage } from "@inertiajs/react";
 
 export default function KelompokIndex({ auth }) {
     const { kelompoks, users: user } = usePage().props;
+
+    const filteredKelompoks = kelompoks.filter(
+        (tugas) => tugas.is_active == "Y"
+    );
 
     const tableTitle = ["Nomor", "Nama Kelompok", "Kuota", "Action"];
 
@@ -71,10 +74,10 @@ export default function KelompokIndex({ auth }) {
                     <TableContainer>
                         <TableHead datas={tableTitle} />
                         <TableBody>
-                            {kelompoks.map((kelompok, index) => {
+                            {filteredKelompoks.map((kelompok, index) => {
                                 const disableCondition =
                                     auth.user.kelompok_id != null ||
-                                    kelompok.members.length ==
+                                    kelompok.members.length >=
                                         kelompok.capacity;
 
                                 return (

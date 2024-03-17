@@ -13,10 +13,15 @@ class Kelompok extends Model
 
     protected $fillable = [
         'name',
-        'capacity'
+        'capacity',
+        'is_active'
     ];
 
     public function members() {
         return $this->hasMany(User::class, 'kelompok_id', 'id');
+    }
+
+    public function tugases() {
+        return $this->hasMany(Tugas::class, 'kelompok_id', 'id');
     }
 }

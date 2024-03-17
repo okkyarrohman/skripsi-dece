@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'kelas' => fake()->name(),
             'absen' => fake()->randomNumber(),
-            'kelompok_id' => Kelompok::inRandomOrder()->first()->id,
+            'kelompok_id' => Kelompok::inRandomOrder()->where('is_active', 'Y')->first()->id,
             'role' => 'siswa',
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
