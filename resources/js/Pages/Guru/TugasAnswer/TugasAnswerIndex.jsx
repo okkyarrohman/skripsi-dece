@@ -5,9 +5,9 @@ import TableData from "@/Components/atoms/Table/TableData";
 import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 
-export default function HasilTugasIndex({ auth }) {
+export default function TugasAnswerIndex({ auth }) {
     const { kelompoks } = usePage().props;
 
     const tableTitle = ["Nomor", "Nama Kelompok", "Total Tugas", "Action"];
@@ -28,12 +28,19 @@ export default function HasilTugasIndex({ auth }) {
                                     />
                                     <TableData
                                         children={
-                                            <PrimaryButton
-                                                style="small"
-                                                className="mx-auto"
+                                            <Link
+                                                href={route(
+                                                    "tugas-answer-guru.show",
+                                                    kelompok.id
+                                                )}
                                             >
-                                                Detail
-                                            </PrimaryButton>
+                                                <PrimaryButton
+                                                    style="small"
+                                                    className="mx-auto"
+                                                >
+                                                    Detail
+                                                </PrimaryButton>
+                                            </Link>
                                         }
                                     />
                                 </TableRow>

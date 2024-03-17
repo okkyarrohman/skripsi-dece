@@ -135,7 +135,11 @@ export default function KelompokShow({ auth }) {
                                     deadline={`${formattedDate(
                                         tugas.deadline_date
                                     )}, ${tugas.deadline_time} `}
-                                    grade={80}
+                                    grade={
+                                        answeredTugas
+                                            ? answeredTugas.grade
+                                            : "Belum Dinilai"
+                                    }
                                 />
                             );
                         })}

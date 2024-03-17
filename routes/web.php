@@ -56,6 +56,7 @@ Route::group(['middleware' => 'role:guru'], function () {
             'absen-guru' => AbsenGuruController::class,
             'data-siswa-guru' => DataSiswaController::class
         ]);
+        Route::get('/tugas-answer-guru/jawaban-siswa/{id}', [TugasAnswerGuruController::class, 'jawabanSiswa'])->name('tugas-answer-guru.jawabanSiswa');
         Route::get('/panduan-guru', function () {
             return Inertia::render('Guru/Panduan');
         })->name('panduan-guru');
