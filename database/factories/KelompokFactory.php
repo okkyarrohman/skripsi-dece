@@ -18,7 +18,8 @@ class KelompokFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'capacity' => $this->faker->numberBetween(1, 3)
+            'capacity' => $this->faker->numberBetween(1, 3),
+            'is_active' => $this->faker->randomElement(['Y', 'N']),
         ];
     }
 }

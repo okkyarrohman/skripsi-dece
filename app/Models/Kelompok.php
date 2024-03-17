@@ -13,7 +13,8 @@ class Kelompok extends Model
 
     protected $fillable = [
         'name',
-        'capacity'
+        'capacity',
+        'is_active'
     ];
 
     public function members() {

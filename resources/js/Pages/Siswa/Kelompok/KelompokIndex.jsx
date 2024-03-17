@@ -13,6 +13,10 @@ import { Link, usePage } from "@inertiajs/react";
 export default function KelompokIndex({ auth }) {
     const { kelompoks, users: user } = usePage().props;
 
+    const filteredKelompoks = kelompoks.filter(
+        (tugas) => tugas.is_active == "Y"
+    );
+
     const tableTitle = ["Nomor", "Nama Kelompok", "Kuota", "Action"];
 
     return (
@@ -70,10 +74,10 @@ export default function KelompokIndex({ auth }) {
                     <TableContainer>
                         <TableHead datas={tableTitle} />
                         <TableBody>
-                            {kelompoks.map((kelompok, index) => {
+                            {filteredKelompoks.map((kelompok, index) => {
                                 const disableCondition =
                                     auth.user.kelompok_id != null ||
-                                    kelompok.members.length ==
+                                    kelompok.members.length >=
                                         kelompok.capacity;
 
                                 return (

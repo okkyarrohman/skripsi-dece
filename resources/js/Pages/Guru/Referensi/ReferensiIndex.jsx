@@ -17,7 +17,7 @@ export default function ReferensiIndex({ auth }) {
     return (
         <AuthenticatedLayout title="Referensi" userLogin={auth.user}>
             <div className="p-6 rounded-xl bg-gray-50 space-y-6">
-                <Link href="">
+                <Link href={route("referensi-guru.create")}>
                     <PrimaryButton className="ml-auto">
                         Tambah Referensi
                     </PrimaryButton>
@@ -41,7 +41,18 @@ export default function ReferensiIndex({ auth }) {
                                         )}
                                     />
                                     <TableData
-                                        children={<ActionButton />}
+                                        children={
+                                            <ActionButton
+                                                onEdit={route(
+                                                    "referensi-guru.edit",
+                                                    referensi.id
+                                                )}
+                                                onDelete={route(
+                                                    "referensi-guru.destroy",
+                                                    referensi.id
+                                                )}
+                                            />
+                                        }
                                         nowrap
                                     />
                                 </TableRow>

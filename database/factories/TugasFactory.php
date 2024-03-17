@@ -18,7 +18,7 @@ class TugasFactory extends Factory
     public function definition(): array
     {
         return [
-            'kelompok_id' => Kelompok::inRandomOrder()->first()->id,
+            'kelompok_id' => Kelompok::inRandomOrder()->where('is_active', 'Y')->first()->id,
             'is_active' => $this->faker->randomElement(['Y', 'N']),
             'name' => $this->faker->name(),
             'description' => $this->faker->paragraph(),

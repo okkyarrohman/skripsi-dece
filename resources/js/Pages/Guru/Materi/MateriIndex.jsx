@@ -16,7 +16,7 @@ export default function MateriIndex({ auth }) {
     return (
         <AuthenticatedLayout title="Materi" userLogin={auth.user}>
             <div className="p-6 rounded-xl bg-gray-50 space-y-6">
-                <Link href="">
+                <Link href={route("materi-guru.create")}>
                     <PrimaryButton className="ml-auto">
                         Tambah Materi
                     </PrimaryButton>
@@ -39,7 +39,18 @@ export default function MateriIndex({ auth }) {
                                         align="text-left"
                                     />
                                     <TableData
-                                        children={<ActionButton />}
+                                        children={
+                                            <ActionButton
+                                                onEdit={route(
+                                                    "materi-guru.edit",
+                                                    materi.id
+                                                )}
+                                                onDelete={route(
+                                                    "materi-guru.destroy",
+                                                    materi.id
+                                                )}
+                                            />
+                                        }
                                         nowrap
                                     />
                                 </TableRow>

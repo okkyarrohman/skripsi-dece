@@ -62,7 +62,7 @@ export default function ActionButton({
                     </TertiaryButton>
                 </Link>
             )}
-            <Link method="POST" as="button" href={onDelete}>
+            <Link method="DELETE" as="button" href={onDelete}>
                 <SecondaryButton style="small">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -1,3 +1,4 @@
+import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
 import InputPassword from "@/Components/atoms/Input/InputPassword";
 import InputText from "@/Components/atoms/Input/InputText";
@@ -51,6 +52,7 @@ export default function Login() {
                                 />
                             </svg>
                         </InputText>
+                        <InputError message={errors.email} className="mt-2" />
                     </div>
                     <div>
                         <Label htmlFor="password" text="Password" />
@@ -61,6 +63,10 @@ export default function Login() {
                             onChange={(e) =>
                                 setData("password", e.target.value)
                             }
+                        />
+                        <InputError
+                            message={errors.password}
+                            className="mt-2"
                         />
                     </div>
                 </div>

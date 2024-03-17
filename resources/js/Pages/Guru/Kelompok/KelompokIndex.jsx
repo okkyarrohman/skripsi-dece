@@ -19,7 +19,7 @@ export default function KelompokIndex({ auth }) {
     return (
         <AuthenticatedLayout title="Kelompok" userLogin={auth.user}>
             <div className="p-6 rounded-xl bg-gray-50 space-y-6">
-                <Link href="">
+                <Link href={route("kelompok-guru.create")}>
                     <PrimaryButton className="ml-auto">
                         Tambah Kelompok
                     </PrimaryButton>
@@ -44,7 +44,7 @@ export default function KelompokIndex({ auth }) {
                                         children={
                                             <Status
                                                 active={
-                                                    memberOnline.length != 0
+                                                    kelompok.is_active == "Y"
                                                 }
                                                 activeStatus="Aktif"
                                                 nonactiveStatus="Nonaktif"
@@ -52,7 +52,23 @@ export default function KelompokIndex({ auth }) {
                                         }
                                     />
                                     <TableData
-                                        children={<ActionButton view />}
+                                        children={
+                                            <ActionButton
+                                                view
+                                                onEdit={route(
+                                                    "kelompok-guru.edit",
+                                                    kelompok.id
+                                                )}
+                                                onView={route(
+                                                    "kelompok-guru.show",
+                                                    kelompok.id
+                                                )}
+                                                onDelete={route(
+                                                    "kelompok-guru.destroy",
+                                                    kelompok.id
+                                                )}
+                                            />
+                                        }
                                     />
                                 </TableRow>
                             );
