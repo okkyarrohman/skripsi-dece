@@ -7,12 +7,11 @@ import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { usePage } from "@inertiajs/react";
-import { useEffect, useState } from "react";
 
 export default function DataSiswaIndex({ auth }) {
     const { users } = usePage().props;
 
-    console.log(users);
+    const sortedUsers = users.sort((a, b) => a.absen - b.absen);
 
     const tableTitle = ["Nomor Absen", "Nama", "Status Login", "Action"];
 
@@ -22,7 +21,7 @@ export default function DataSiswaIndex({ auth }) {
                 <TableContainer>
                     <TableHead datas={tableTitle} />
                     <TableBody>
-                        {users.map((user, index) => {
+                        {sortedUsers.map((user, index) => {
                             return (
                                 <TableRow key={index}>
                                     <TableData children={user.absen} />
