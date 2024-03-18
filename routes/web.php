@@ -11,6 +11,7 @@ use App\Http\Controllers\Guru\TugasGuruController;
 use App\Http\Controllers\Guru\TutorialGuruController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Siswa\AbsenController;
+use App\Http\Controllers\Siswa\AbsenPresentController;
 use App\Http\Controllers\Siswa\KelompokController;
 use App\Http\Controllers\Siswa\MateriController;
 use App\Http\Controllers\Siswa\ReferensiController;
@@ -76,10 +77,12 @@ Route::group(['middleware' => 'role:siswa'], function () {
             'tutorial' => TutorialController::class,
             'kelompok' => KelompokController::class,
             'absen' => AbsenController::class,
+            'absen-present' => AbsenPresentController::class
         ]);
         Route::post('/materi/{id}/seen', [MateriController::class, 'markSeen'])->name('materi.markSeen');
         Route::post('/referensi/{id}/seen', [ReferensiController::class, 'markSeen'])->name('referensi.markSeen');
         Route::patch('/kelompok/{id}/join', [KelompokController::class, 'join'])->name('kelompok.join');
+        Route::post('/absen/{id}/present', [AbsenPresentController::class, 'present'])->name('absen-present.present');
         Route::get('/panduan', function () {
             return Inertia::render('Siswa/Panduan');
         })->name('panduan');
