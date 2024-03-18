@@ -1,13 +1,11 @@
 import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 import QRCode from "react-qr-code";
 
 export default function Dashboard({ auth }) {
-    const { absens: absen } = usePage().props;
-
-    console.log(absen);
+    const { absens: absen, materis } = usePage().props;
 
     return (
         <AuthenticatedLayout title="Dashboard" userLogin={auth.user}>
@@ -63,6 +61,7 @@ export default function Dashboard({ auth }) {
                             </div>
                             <div>
                                 <QRCode
+                                    method="POST"
                                     value={route(
                                         "absen-present.present",
                                         absen.id

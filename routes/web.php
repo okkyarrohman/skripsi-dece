@@ -82,7 +82,7 @@ Route::group(['middleware' => 'role:siswa'], function () {
         Route::post('/materi/{id}/seen', [MateriController::class, 'markSeen'])->name('materi.markSeen');
         Route::post('/referensi/{id}/seen', [ReferensiController::class, 'markSeen'])->name('referensi.markSeen');
         Route::patch('/kelompok/{id}/join', [KelompokController::class, 'join'])->name('kelompok.join');
-        Route::post('/absen/{id}/present', [AbsenPresentController::class, 'present'])->name('absen-present.present');
+        Route::get('/absen/{id}/present', [AbsenPresentController::class, 'present'])->name('absen-present.present');
         Route::get('/panduan', function () {
             return Inertia::render('Siswa/Panduan');
         })->name('panduan');
