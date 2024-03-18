@@ -1,6 +1,10 @@
 import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
 import SecondaryButton from "@/Components/atoms/Button/SecondaryButton";
+import MateriTitle from "@/Components/atoms/Materi/MateriTitle";
+import Description from "@/Components/atoms/Text/Description";
+import Title from "@/Components/atoms/Text/Title";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
+import DashboardAbsensi from "@/Components/organisms/Dashboard/DashboardAbsensi";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { formattedDate } from "@/utils/helper";
 import { Link, usePage } from "@inertiajs/react";
@@ -16,9 +20,25 @@ export default function Dashboard({ auth }) {
     return (
         <AuthenticatedLayout title="Dashboard" userLogin={auth.user}>
             <div className="grid grid-cols-10 gap-6">
-                <div className="col-span-4">
+                <div className="col-span-4 space-y-6">
                     <div className="p-6 rounded-md bg-gray-50 space-y-4 w-full">
-                        <IconTitle title="Absensi Siswa">
+                        <div className="line-clamp-2">
+                            <Title
+                                title={`Hai ${auth.user.name}`}
+                                color="text-orange-500"
+                                size="text-[2rem]"
+                            />
+                        </div>
+                        <Description desc="Semoga hari belajarmu menyenangkan!" />
+                    </div>
+                    <DashboardAbsensi
+                        name={absen.name}
+                        date={absen.meet_date}
+                        absenId={absen.id}
+                        alreadyPresent={currentAbsenByUserId}
+                    />
+                    <div className="p-6 rounded-md bg-gray-50 space-y-4 w-full">
+                        <IconTitle title="Materi Baru">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="18"
@@ -44,52 +64,44 @@ export default function Dashboard({ auth }) {
                                 />
                             </svg>
                         </IconTitle>
-                        <div className="flex justify-between">
-                            <div className="flex flex-col justify-between">
-                                <div>
-                                    <p className="text-lg text-orange-500 line-clamp-1">
-                                        {absen.name}
-                                    </p>
-                                    <p className="text-sm">
-                                        {formattedDate(absen.meet_date)}
-                                    </p>
-                                </div>
+                        {materis.map((materi, index) => {
+                            return (
                                 <Link
-                                    as="button"
                                     method="POST"
-                                    href={route(
-                                        "absen-present.present",
-                                        absen.id
-                                    )}
+                                    href={route("materi.markSeen", materi.id)}
+                                    className="flex justify-between items-center"
                                 >
-                                    {currentAbsenByUserId ? (
-                                        <SecondaryButton
-                                            style="small"
-                                            size="text-sm"
-                                            disabled
-                                        >
-                                            Sudah Absen
-                                        </SecondaryButton>
-                                    ) : (
-                                        <PrimaryButton
-                                            style="small"
-                                            size="text-sm"
-                                        >
-                                            Saya Hadir
-                                        </PrimaryButton>
-                                    )}
+                                    <MateriTitle
+                                        size="text-base"
+                                        numberSize="text-xl"
+                                        numberContainer="size-10"
+                                        number={index + 1}
+                                        title={materi.name}
+                                    />
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M8.9101 20.67C8.7201 20.67 8.5301 20.6 8.3801 20.45C8.0901 20.16 8.0901 19.68 8.3801 19.39L14.9001 12.87C15.3801 12.39 15.3801 11.61 14.9001 11.13L8.3801 4.61002C8.0901 4.32002 8.0901 3.84002 8.3801 3.55002C8.6701 3.26002 9.1501 3.26002 9.4401 3.55002L15.9601 10.07C16.4701 10.58 16.7601 11.27 16.7601 12C16.7601 12.73 16.4801 13.42 15.9601 13.93L9.4401 20.45C9.2901 20.59 9.1001 20.67 8.9101 20.67Z"
+                                            fill="#383A42"
+                                        />
+                                    </svg>
                                 </Link>
-                            </div>
-                            <div>
-                                <QRCode
-                                    value={route(
-                                        "absen-present.present",
-                                        absen.id
-                                    )}
-                                    className="size-40"
-                                />
-                            </div>
-                        </div>
+                            );
+                        })}
+                        <Link href={route("materi.index")} className="block">
+                            <PrimaryButton
+                                style="small"
+                                size="text-sm"
+                                className="mx-auto"
+                            >
+                                Lihat Semua Materi
+                            </PrimaryButton>
+                        </Link>
                     </div>
                 </div>
                 <div className="col-span-6"></div>
