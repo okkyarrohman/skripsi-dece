@@ -15,5 +15,7 @@ class AbsenPresentController extends Controller
             'absen_id' => $id,
             'user_id' => Auth::user()->id
         ]);
+
+        return to_route('dashboard.siswa');
     }
 }

@@ -1,11 +1,17 @@
 import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
+import SecondaryButton from "@/Components/atoms/Button/SecondaryButton";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Link, useForm, usePage } from "@inertiajs/react";
+import { formattedDate } from "@/utils/helper";
+import { Link, usePage } from "@inertiajs/react";
 import QRCode from "react-qr-code";
 
 export default function Dashboard({ auth }) {
     const { absens: absen, materis } = usePage().props;
+
+    const currentAbsenByUserId = absen.presents.find(
+        (userPresent) => userPresent.user_id == auth.user.id
+    );
 
     return (
         <AuthenticatedLayout title="Dashboard" userLogin={auth.user}>
@@ -44,7 +50,9 @@ export default function Dashboard({ auth }) {
                                     <p className="text-lg text-orange-500 line-clamp-1">
                                         {absen.name}
                                     </p>
-                                    <p className="text-sm">{absen.meet_date}</p>
+                                    <p className="text-sm">
+                                        {formattedDate(absen.meet_date)}
+                                    </p>
                                 </div>
                                 <Link
                                     as="button"
@@ -54,14 +62,26 @@ export default function Dashboard({ auth }) {
                                         absen.id
                                     )}
                                 >
-                                    <PrimaryButton style="small" size="text-sm">
-                                        Saya Hadir
-                                    </PrimaryButton>
+                                    {currentAbsenByUserId ? (
+                                        <SecondaryButton
+                                            style="small"
+                                            size="text-sm"
+                                            disabled
+                                        >
+                                            Sudah Absen
+                                        </SecondaryButton>
+                                    ) : (
+                                        <PrimaryButton
+                                            style="small"
+                                            size="text-sm"
+                                        >
+                                            Saya Hadir
+                                        </PrimaryButton>
+                                    )}
                                 </Link>
                             </div>
                             <div>
                                 <QRCode
-                                    method="POST"
                                     value={route(
                                         "absen-present.present",
                                         absen.id

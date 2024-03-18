@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
     public function siswa()
     {
-        $absens = Absen::latest()->take(1)->first();
+        $absens = Absen::with(['presents'])->latest()->take(1)->first();
 
         $materis = Materi::latest()->take(5)->get();
 
