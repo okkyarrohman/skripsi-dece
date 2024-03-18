@@ -56,7 +56,6 @@ class TugasGuruController extends Controller
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
             'description.required' => 'Deskripsi tidak boleh kosong',
             'description.string' => 'Deskripsi harus berupa teks',
-            'name.string' => 'Deskripsi harus berupa teks',
             'deadline_date.required' => 'Tanggal deadline tidak boleh kosong',
             'deadline_date.date' => 'Tanggal deadline harus berupa tanggal',
             'deadline_time.required' => 'Waktu deadline tidak boleh kosong',

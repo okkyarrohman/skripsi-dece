@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Absen;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AbsenController extends Controller
 {
