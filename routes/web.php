@@ -12,6 +12,7 @@ use App\Http\Controllers\Guru\TutorialGuruController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Siswa\AbsenController;
 use App\Http\Controllers\Siswa\AbsenPresentController;
+use App\Http\Controllers\Siswa\KegiatanController;
 use App\Http\Controllers\Siswa\KelompokController;
 use App\Http\Controllers\Siswa\MateriController;
 use App\Http\Controllers\Siswa\ReferensiController;
@@ -77,7 +78,8 @@ Route::group(['middleware' => 'role:siswa'], function () {
             'tutorial' => TutorialController::class,
             'kelompok' => KelompokController::class,
             'absen' => AbsenController::class,
-            'absen-present' => AbsenPresentController::class
+            'absen-present' => AbsenPresentController::class,
+            'kegiatan' => KegiatanController::class
         ]);
         Route::post('/materi/{id}/seen', [MateriController::class, 'markSeen'])->name('materi.markSeen');
         Route::post('/referensi/{id}/seen', [ReferensiController::class, 'markSeen'])->name('referensi.markSeen');
@@ -87,6 +89,12 @@ Route::group(['middleware' => 'role:siswa'], function () {
             return Inertia::render('Siswa/Panduan');
         })->name('panduan');
     });
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/edit-profil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/edit-profil', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/edit-profil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';

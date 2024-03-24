@@ -3,6 +3,7 @@ import IconTitle from "@/Components/molecules/Text/IconTitle";
 import QRCode from "react-qr-code";
 
 export default function DashboardAbsensi({
+    absen,
     name,
     date,
     absenId,
@@ -37,20 +38,22 @@ export default function DashboardAbsensi({
                 </svg>
             </IconTitle>
 
-            <div className="flex justify-between">
-                <AbsensiInfo
-                    name={name}
-                    date={date}
-                    absenId={absenId}
-                    alreadyPresent={alreadyPresent}
-                />
-                <div className="relative">
-                    <QRCode
-                        value={route("absen-present.present", absenId)}
-                        className="size-40"
+            {absen ? (
+                <div className="flex justify-between">
+                    <AbsensiInfo
+                        name={name}
+                        date={date}
+                        absenId={absenId}
+                        alreadyPresent={alreadyPresent}
                     />
+                    <div className="relative">
+                        <QRCode
+                            value={route("absen-present.present", absenId)}
+                            className="size-40"
+                        />
+                    </div>
                 </div>
-            </div>
+            ) : null}
         </div>
     );
 }

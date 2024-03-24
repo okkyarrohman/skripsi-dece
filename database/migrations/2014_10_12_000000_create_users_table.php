@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('kelas')->nullable();
             $table->integer('absen')->nullable();
+            $table->string('photo')->nullable();
             $table->string('role');
             $table->unsignedBigInteger('kelompok_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();

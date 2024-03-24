@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absen;
+use App\Models\Kegiatan;
 use App\Models\Materi;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,6 +23,8 @@ class DashboardController extends Controller
 
         $materis = Materi::latest()->take(5)->get();
 
-        return Inertia::render('Siswa/Dashboard', compact('absens', 'materis'));
+        $kegiatans = Kegiatan::latest()->take(5)->get();
+
+        return Inertia::render('Siswa/Dashboard', compact('absens', 'materis', 'kegiatans'));
     }
 }
