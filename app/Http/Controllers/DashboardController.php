@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         $materis = Materi::latest()->take(5)->get();
 
-        $kegiatans = Kegiatan::latest()->take(5)->get();
+        $kegiatans = Kegiatan::latest()->take(3)->get();
 
         return Inertia::render('Siswa/Dashboard', compact('absens', 'materis', 'kegiatans'));
     }
