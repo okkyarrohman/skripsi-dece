@@ -14,7 +14,9 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        //
+        $absens = Absen::with(['presents'])->get();
+
+        return Inertia::render('Siswa/Absen/AbsenIndex', compact('absens'));
     }
 
     /**

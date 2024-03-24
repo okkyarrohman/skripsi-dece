@@ -1,5 +1,7 @@
+import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
 import AbsensiInfo from "@/Components/molecules/Absensi/AbsensiInfo";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
+import { Link } from "@inertiajs/react";
 import QRCode from "react-qr-code";
 
 export default function DashboardAbsensi({
@@ -39,21 +41,24 @@ export default function DashboardAbsensi({
             </IconTitle>
 
             {absen ? (
-                <div className="flex justify-between">
+                <div className="md:flex justify-between space-y-4 md:space-y-0">
                     <AbsensiInfo
                         name={name}
                         date={date}
                         absenId={absenId}
                         alreadyPresent={alreadyPresent}
                     />
-                    <div className="relative">
-                        <QRCode
-                            value={route("absen-present.present", absenId)}
-                            className="size-40"
-                        />
-                    </div>
+                    <QRCode
+                        value={route("absen-present.present", absenId)}
+                        className="size-40 mx-auto md:mx-0"
+                    />
                 </div>
             ) : null}
+            <Link href={route("absen.index")} className="block">
+                <PrimaryButton style="small" size="text-sm" className="mx-auto">
+                    Lihat Kehadiran
+                </PrimaryButton>
+            </Link>
         </div>
     );
 }

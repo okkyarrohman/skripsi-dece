@@ -12,7 +12,7 @@ export default function UserNavbar({ userLogin, children }) {
                 <p className="hidden md:block">
                     {userLogin ? userLogin.name : "Guest"}
                 </p>
-                <NavIcon img={userLogin.photo} />
+                <NavIcon userLogin={userLogin} />
             </Link>
         </nav>
     );

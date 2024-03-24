@@ -10,8 +10,8 @@ export default function AbsensiInfo({
     alreadyPresent = false,
 }) {
     return (
-        <div className="flex flex-col justify-between">
-            <div>
+        <div className="flex flex-col justify-between md:space-y-0 space-y-4">
+            <div className="md:*:text-left *:text-center">
                 <p className="text-lg text-orange-500 line-clamp-1">{name}</p>
                 <p className="text-sm">{formattedDate(date)}</p>
             </div>
@@ -19,13 +19,23 @@ export default function AbsensiInfo({
                 as="button"
                 method="POST"
                 href={route("absen-present.present", absenId)}
+                className="block"
             >
                 {alreadyPresent ? (
-                    <SecondaryButton style="small" size="text-sm" disabled>
+                    <SecondaryButton
+                        style="small"
+                        size="text-sm"
+                        disabled
+                        className="md:mx-0 mx-auto"
+                    >
                         Sudah Absen
                     </SecondaryButton>
                 ) : (
-                    <PrimaryButton style="small" size="text-sm">
+                    <PrimaryButton
+                        style="small"
+                        size="text-sm"
+                        className="md:mx-0 mx-auto"
+                    >
                         Saya Hadir
                     </PrimaryButton>
                 )}

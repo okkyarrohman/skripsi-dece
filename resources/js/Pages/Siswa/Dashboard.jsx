@@ -26,7 +26,7 @@ export default function Dashboard({ auth }) {
 
     return (
         <AuthenticatedLayout title="Dashboard" userLogin={auth.user}>
-            <div className="grid grid-cols-10 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-10 gap-0 md:gap-6 space-y-6 md:space-y-0">
                 <div className="col-span-4 space-y-6">
                     <DashboardGreet userLogin={auth.user} />
                     <DashboardAbsensi
@@ -36,7 +36,7 @@ export default function Dashboard({ auth }) {
                         absenId={absen && absen.id}
                         alreadyPresent={currentAbsenByUserId}
                     />
-                    <DashboardMateri>
+                    <DashboardMateri materi={materis.length != 0}>
                         {materis.map((materi, index) => {
                             return (
                                 <MateriItem
@@ -50,7 +50,10 @@ export default function Dashboard({ auth }) {
                 </div>
                 <div className="col-span-6 space-y-6">
                     <div className="p-6 rounded-xl bg-gray-50 w-full h-[36rem]"></div>
-                    <DashboardKegiatan markedDates={markedDates}>
+                    <DashboardKegiatan
+                        markedDates={markedDates}
+                        kegiatan={kegiatans.length != 0}
+                    >
                         {kegiatans.map((kegiatan, index) => {
                             return (
                                 <KegiatanItem

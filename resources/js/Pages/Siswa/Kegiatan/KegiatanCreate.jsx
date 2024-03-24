@@ -121,7 +121,10 @@ export default function KegiatanCreate({ auth }) {
                             className="mt-2"
                         />
                     </div>
-                    <PrimaryButton type="submit" className="ml-auto">
+                    <PrimaryButton
+                        type="submit"
+                        className="mx-auto md:mx-0 md:ml-auto"
+                    >
                         Tambah Kegiatan
                     </PrimaryButton>
                 </form>

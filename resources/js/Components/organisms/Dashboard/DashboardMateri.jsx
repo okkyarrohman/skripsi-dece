@@ -2,7 +2,7 @@ import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
 import { Link } from "@inertiajs/react";
 
-export default function DashboardMateri({ children }) {
+export default function DashboardMateri({ materi, children }) {
     return (
         <div className="p-6 rounded-md bg-gray-50 space-y-4 w-full">
             <IconTitle title="Materi Baru">
@@ -32,11 +32,17 @@ export default function DashboardMateri({ children }) {
                 </svg>
             </IconTitle>
             {children}
-            <Link href={route("materi.index")} className="block">
-                <PrimaryButton style="small" size="text-sm" className="mx-auto">
-                    Lihat Semua Materi
-                </PrimaryButton>
-            </Link>
+            {materi && (
+                <Link href={route("materi.index")} className="block">
+                    <PrimaryButton
+                        style="small"
+                        size="text-sm"
+                        className="mx-auto"
+                    >
+                        Lihat Semua Materi
+                    </PrimaryButton>
+                </Link>
+            )}
         </div>
     );
 }

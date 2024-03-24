@@ -4,7 +4,7 @@ import { Link } from "@inertiajs/react";
 import { useState } from "react";
 import Calendar from "react-calendar";
 
-export default function DashboardKegiatan({ children, markedDates }) {
+export default function DashboardKegiatan({ kegiatan, children, markedDates }) {
     const [date, setDate] = useState(new Date());
     // const markedDates = kegiatans.map((kegiatan) => new Date(kegiatan.date));
 
@@ -28,7 +28,7 @@ export default function DashboardKegiatan({ children, markedDates }) {
                 tileContent={tileContent}
                 className="rounded-lg mx-auto"
             />
-            <div className="flex justify-between items-center">
+            <div className="md:flex justify-between items-center md:space-y-0 space-y-4">
                 <IconTitle title="Tugas dan Kegiatan">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -52,8 +52,12 @@ export default function DashboardKegiatan({ children, markedDates }) {
                         />
                     </svg>
                 </IconTitle>
-                <Link href={route("kegiatan.create")}>
-                    <PrimaryButton style="small" size="text-sm">
+                <Link href={route("kegiatan.create")} className="block">
+                    <PrimaryButton
+                        style="small"
+                        size="text-sm"
+                        className="md:mx-0 mx-auto"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -76,11 +80,17 @@ export default function DashboardKegiatan({ children, markedDates }) {
                 </Link>
             </div>
             {children}
-            <Link href={route("kegiatan.index")} className="block">
-                <PrimaryButton style="small" size="text-sm" className="mx-auto">
-                    Lihat Semua Kegiatan
-                </PrimaryButton>
-            </Link>
+            {kegiatan && (
+                <Link href={route("kegiatan.index")} className="block">
+                    <PrimaryButton
+                        style="small"
+                        size="text-sm"
+                        className="mx-auto"
+                    >
+                        Lihat Semua Kegiatan
+                    </PrimaryButton>
+                </Link>
+            )}
         </div>
     );
 }
