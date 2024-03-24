@@ -28,7 +28,10 @@ export default function Dashboard({ auth }) {
         <AuthenticatedLayout title="Dashboard" userLogin={auth.user}>
             <div className="grid grid-cols-1 md:grid-cols-10 gap-0 md:gap-6 space-y-6 md:space-y-0">
                 <div className="col-span-4 space-y-6">
-                    <DashboardGreet userLogin={auth.user} />
+                    <DashboardGreet
+                        userLogin={auth.user}
+                        desc="Semoga hari belajarmu menyenangkan!"
+                    />
                     <DashboardAbsensi
                         absen={absen}
                         name={absen && absen.name}

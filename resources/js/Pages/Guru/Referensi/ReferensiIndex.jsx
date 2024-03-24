@@ -8,6 +8,7 @@ import TableRow from "@/Components/atoms/Table/TableRow";
 import ActionButton from "@/Components/molecules/Button/ActionButton";
 import { Link, usePage } from "@inertiajs/react";
 import { formattedDate } from "@/utils/helper";
+import NoData from "@/Components/molecules/NoData/NoData";
 
 export default function ReferensiIndex({ auth }) {
     const { referensis } = usePage().props;
@@ -22,44 +23,50 @@ export default function ReferensiIndex({ auth }) {
                         Tambah Referensi
                     </PrimaryButton>
                 </Link>
-
-                <TableContainer>
-                    <TableHead datas={tableTitle} />
-                    <TableBody>
-                        {referensis.map((referensi, index) => {
-                            return (
-                                <TableRow key={index}>
-                                    <TableData children={index + 1} />
-                                    <TableData
-                                        children={referensi.name}
-                                        align="text-left"
-                                        nowrap
-                                    />
-                                    <TableData
-                                        children={formattedDate(
-                                            referensi.created_at
-                                        )}
-                                    />
-                                    <TableData
-                                        children={
-                                            <ActionButton
-                                                onEdit={route(
-                                                    "referensi-guru.edit",
-                                                    referensi.id
-                                                )}
-                                                onDelete={route(
-                                                    "referensi-guru.destroy",
-                                                    referensi.id
-                                                )}
-                                            />
-                                        }
-                                        nowrap
-                                    />
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </TableContainer>
+                {referensis.length == 0 ? (
+                    <NoData
+                        title="Belum Terdapat Referensi"
+                        desc="Tambahkan referensi segera!"
+                    />
+                ) : (
+                    <TableContainer>
+                        <TableHead datas={tableTitle} />
+                        <TableBody>
+                            {referensis.map((referensi, index) => {
+                                return (
+                                    <TableRow key={index}>
+                                        <TableData children={index + 1} />
+                                        <TableData
+                                            children={referensi.name}
+                                            align="text-left"
+                                            nowrap
+                                        />
+                                        <TableData
+                                            children={formattedDate(
+                                                referensi.created_at
+                                            )}
+                                        />
+                                        <TableData
+                                            children={
+                                                <ActionButton
+                                                    onEdit={route(
+                                                        "referensi-guru.edit",
+                                                        referensi.id
+                                                    )}
+                                                    onDelete={route(
+                                                        "referensi-guru.destroy",
+                                                        referensi.id
+                                                    )}
+                                                />
+                                            }
+                                            nowrap
+                                        />
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </TableContainer>
+                )}
             </div>
         </AuthenticatedLayout>
     );
