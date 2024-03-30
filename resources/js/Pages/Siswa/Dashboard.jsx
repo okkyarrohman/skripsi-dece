@@ -49,7 +49,7 @@ export default function Dashboard({ auth }) {
         labels,
         datasets: [
             {
-                data: Object.values(monthlyLogins).slice(2),
+                data: monthlyLogins ? Object.values(monthlyLogins).slice(2) : 0,
                 borderColor: "rgba(251, 138, 60, 1)",
                 backgroundColor: "rgba(255, 99, 132, 0.5)",
             },

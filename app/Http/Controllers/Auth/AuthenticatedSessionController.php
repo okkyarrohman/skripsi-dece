@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -91,6 +92,7 @@ class AuthenticatedSessionController extends Controller
         $columnName = 'total_login_' . strtolower(Carbon::createFromFormat('m', $currentMonth)->format('F'));
 
         MonthlyLogin::where('user_id', $userId)
-                    ->update([$columnName => $timeDifference]);
+                    // ->update([$columnName => $timeDifference]);
+                    ->update([$columnName => DB::raw("`$columnName` + $timeDifference")]);
     }
 }

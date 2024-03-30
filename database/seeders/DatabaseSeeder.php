@@ -12,6 +12,7 @@ use App\Models\MateriSeen;
 use App\Models\Referensi;
 use App\Models\ReferensiSeen;
 use App\Models\Tugas;
+use App\Models\TugasAnswer;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -32,5 +33,6 @@ class DatabaseSeeder extends Seeder
         Referensi::factory(5)->create();
         Absen::factory(1)->create();
         Kegiatan::factory(5)->create();
+        TugasAnswer::factory(10)->create();
     }
 }

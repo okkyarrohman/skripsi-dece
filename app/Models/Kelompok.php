@@ -14,6 +14,7 @@ class Kelompok extends Model
     protected $fillable = [
         'name',
         'capacity',
+        'average_grade',
         'is_active'
     ];
 
