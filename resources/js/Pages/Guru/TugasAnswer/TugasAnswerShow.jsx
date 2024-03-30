@@ -13,8 +13,6 @@ export default function TugasAnswerShow({ auth }) {
 
     const tableTitle = ["Nomor", "Tugas", "Siswa Yang Mengumpulkan", "Action"];
 
-    console.log(tugases);
-
     return (
         <AuthenticatedLayout back userLogin={auth.user}>
             <div className="bg-gray-50 p-6 rounded-xl space-y-4">

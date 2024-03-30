@@ -13,8 +13,6 @@ import { Link, usePage } from "@inertiajs/react";
 export default function TugasIndex({ auth }) {
     const { tugases } = usePage().props;
 
-    console.log(tugases);
-
     const tableTitle = [
         "Nomor",
         "Nama Tugas",

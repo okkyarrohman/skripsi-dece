@@ -40,7 +40,6 @@ export default function ProfileEdit({ auth }) {
     const handleOnSubmit = (e) => {
         e.preventDefault();
         post(route("profile.update"));
-        console.log("terperbarui");
     };
 
     const handleFileChange = (e) => {

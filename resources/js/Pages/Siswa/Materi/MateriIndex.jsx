@@ -7,8 +7,6 @@ import { usePage } from "@inertiajs/react";
 export default function MateriIndex({ auth }) {
     const { materis } = usePage().props;
 
-    console.log(materis);
-
     return (
         <AuthenticatedLayout userLogin={auth.user} title="Materi">
             {materis.length == 0 ? (

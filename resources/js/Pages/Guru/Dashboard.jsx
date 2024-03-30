@@ -6,10 +6,6 @@ import { usePage } from "@inertiajs/react";
 export default function Dashboard({ auth }) {
     const { kelompoks, tugases, answers } = usePage().props;
 
-    console.log("Kelompok", kelompoks);
-    console.log("Tugas", tugases);
-    console.log("Answer", answers);
-
     let averageGradePerKelompoks = kelompoks.map((kelompok) => {
         let answerFilterByTugas = kelompok.tugases.map((tugas) => {
             return answers.filter((answer) => {
