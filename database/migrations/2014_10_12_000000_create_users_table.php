@@ -25,6 +25,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('session_login_at')->nullable();
             $table->integer('total_login_time')->nullable();
+            // $table->json('total_login_by_month')->nullable();
             $table->timestamps();
 
             $table->foreign('kelompok_id')->references('id')->on('kelompoks');

@@ -4,6 +4,7 @@ import KegiatanItem from "@/Components/molecules/Kegiatan/KegiatanItem";
 import MateriItem from "@/Components/molecules/Materi.jsx/MateriItem";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
 import DashboardAbsensi from "@/Components/organisms/Dashboard/DashboardAbsensi";
+import DashboardChartTotalLogin from "@/Components/organisms/Dashboard/DashboardChartTotalLogin";
 import DashboardKegiatan from "@/Components/organisms/Dashboard/DashboardKegiatan";
 import DashboardMateri from "@/Components/organisms/Dashboard/DashboardMateri";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
@@ -14,7 +15,12 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 export default function Dashboard({ auth }) {
-    const { absens: absen, materis, kegiatans } = usePage().props;
+    const {
+        absens: absen,
+        materis,
+        kegiatans,
+        monthlyLogins,
+    } = usePage().props;
 
     const markedDates = kegiatans.map((kegiatan) => new Date(kegiatan.date));
 
@@ -23,6 +29,32 @@ export default function Dashboard({ auth }) {
         absen.presents.find(
             (userPresent) => userPresent.user_id == auth.user.id
         );
+
+    const labels = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                data: Object.values(monthlyLogins).slice(2),
+                borderColor: "rgba(251, 138, 60, 1)",
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+            },
+        ],
+    };
 
     return (
         <AuthenticatedLayout title="Dashboard" userLogin={auth.user}>
@@ -52,7 +84,7 @@ export default function Dashboard({ auth }) {
                     </DashboardMateri>
                 </div>
                 <div className="col-span-6 space-y-6">
-                    <div className="p-6 rounded-xl bg-gray-50 w-full h-[36rem]"></div>
+                    <DashboardChartTotalLogin data={data} />
                     <DashboardKegiatan
                         markedDates={markedDates}
                         kegiatan={kegiatans.length != 0}

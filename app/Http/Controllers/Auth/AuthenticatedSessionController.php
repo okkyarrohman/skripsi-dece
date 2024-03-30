@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\MonthlyLogin;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
 use Carbon\Carbon;
-
 
 class AuthenticatedSessionController extends Controller
 {
@@ -48,6 +48,10 @@ class AuthenticatedSessionController extends Controller
             $user->session_login_at = Carbon::now();
             $user->save();
 
+            MonthlyLogin::firstOrCreate([
+                'user_id' => $user->id
+            ]);
+
             return redirect()->route('dashboard.siswa');
         }
     }
@@ -64,6 +68,8 @@ class AuthenticatedSessionController extends Controller
         if ($user->session_login_at) {
             $timeDifference = Carbon::parse($user->session_login_at)->diffInMinutes(Carbon::now());
             $user->total_login_time += $timeDifference;
+
+            $this->updateMonthlyLoginTime($user->id, Carbon::now()->month, $timeDifference);
         }
 
         // Reset waktu login untuk sesi ini
@@ -78,5 +84,13 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    private function updateMonthlyLoginTime($userId, $currentMonth, $timeDifference = 0)
+    {
+        $columnName = 'total_login_' . strtolower(Carbon::createFromFormat('m', $currentMonth)->format('F'));
+
+        MonthlyLogin::where('user_id', $userId)
+                    ->update([$columnName => $timeDifference]);
     }
 }
