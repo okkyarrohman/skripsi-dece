@@ -6,6 +6,7 @@ import Label from "@/Components/atoms/Label/Label";
 import Description from "@/Components/atoms/Text/Description";
 import Stepper from "@/Components/molecules/Stepper/Stepper";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { checkDeadlinePassed } from "@/utils/helper";
 import { useForm, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
@@ -13,6 +14,8 @@ export default function TugasShow({ auth }) {
     const [isDisabled, setIsDisabled] = useState(true);
 
     const { tugases: tugas } = usePage().props;
+
+    console.log(tugas);
 
     const { data, setData, post } = useForm({
         tugas_id: tugas.id,
@@ -132,7 +135,13 @@ export default function TugasShow({ auth }) {
                                 <PrimaryButton
                                     full
                                     type="submit"
-                                    disabled={isDisabled}
+                                    disabled={
+                                        isDisabled ||
+                                        checkDeadlinePassed(
+                                            tugas.deadline_date,
+                                            tugas.deadline_time
+                                        )
+                                    }
                                 >
                                     Kirim
                                 </PrimaryButton>

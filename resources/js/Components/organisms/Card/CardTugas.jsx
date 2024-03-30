@@ -11,14 +11,15 @@ export default function CardTugas({
     deadline,
     answered = false,
     tugasId,
+    disabled = false,
 }) {
     return (
-        <div className="bg-gray-50 p-6 rounded-xl space-y-4 border border-gray-400">
+        <div className="bg-gray-50 p-6 rounded-xl space-y-4 border border-orange-500">
             <div className="line-clamp-3">
                 <Title size="text-xl" title={tugasName} />
             </div>
             <p className="text-red-500 text-sm">Deadline : {deadline}</p>
-            <div className="w-full h-0.5 bg-gray-400"></div>
+            <div className="w-full h-0.5 bg-orange-500"></div>
             <div className="line-clamp-2">
                 <Description desc={tugasDesc} />
             </div>
@@ -55,7 +56,12 @@ export default function CardTugas({
                             </svg>
                         </SecondaryButton>
                     ) : (
-                        <PrimaryButton full style="small" size="text-sm">
+                        <PrimaryButton
+                            full
+                            style="small"
+                            size="text-sm"
+                            disabled={disabled}
+                        >
                             Lihat Tugas
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

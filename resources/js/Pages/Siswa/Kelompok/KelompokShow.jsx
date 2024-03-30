@@ -114,7 +114,7 @@ export default function KelompokShow({ auth }) {
                     </IconTitle>
 
                     <div className="grid md:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4">
-                        {filteredTugases.map((tugas, index) => {
+                        {tugases.map((tugas, index) => {
                             const answeredTugas = tugas.answers.find(
                                 (answer) =>
                                     answer.tugas_id == tugas.id &&
@@ -140,6 +140,7 @@ export default function KelompokShow({ auth }) {
                                             ? answeredTugas.grade
                                             : "Belum Dinilai"
                                     }
+                                    disabled={tugas.is_active == "N"}
                                 />
                             );
                         })}
