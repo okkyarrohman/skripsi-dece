@@ -17,8 +17,6 @@ export default function TugasAnswerJawabanSiswa({ auth }) {
 
     const tableTitle = ["Nomor", "Nama", "Nilai", "Action"];
 
-    console.log(answers);
-
     return (
         <AuthenticatedLayout back userLogin={auth.user}>
             <div className="bg-gray-50 p-6 rounded-xl space-y-4">

@@ -15,8 +15,6 @@ export default function TugasShow({ auth }) {
 
     const { tugases: tugas } = usePage().props;
 
-    console.log(tugas);
-
     const { data, setData, post } = useForm({
         tugas_id: tugas.id,
         // kelompok_id: auth.user.kelompok_id,

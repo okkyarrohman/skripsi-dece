@@ -17,8 +17,6 @@ export default function KelompokShow({ auth }) {
         (tugas) => tugas.is_active == "Y" && tugas.kelompok_id == kelompok.id
     );
 
-    console.log(filteredTugases);
-
     const tableTitle = ["Nomor Absen", "Nama Anggota", "Waktu Belajar"];
 
     return (

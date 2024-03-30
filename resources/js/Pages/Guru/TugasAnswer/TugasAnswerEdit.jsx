@@ -27,8 +27,6 @@ export default function TugasAnswerEdit({ auth }) {
         post(route("tugas-answer-guru.update", answer.id));
     };
 
-    console.log(answer);
-
     return (
         <AuthenticatedLayout back userLogin={auth.user}>
             <div className="space-y-6">

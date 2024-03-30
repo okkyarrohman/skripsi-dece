@@ -4,8 +4,6 @@ import MenuSection from "@/Components/organisms/Landing/MenuSection";
 import LandingTemplate from "@/Components/templates/LandingTemplate/LandingTemplate";
 
 export default function Landing({ auth, laravelVersion, phpVersion }) {
-    console.log(auth);
-
     return (
         <LandingTemplate userLogin={auth.user}>
             <HeroSection userLogin={auth.user} />

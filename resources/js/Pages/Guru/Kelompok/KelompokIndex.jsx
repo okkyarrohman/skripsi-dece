@@ -13,8 +13,6 @@ import { Link, usePage } from "@inertiajs/react";
 export default function KelompokIndex({ auth }) {
     const { kelompoks } = usePage().props;
 
-    console.log(kelompoks);
-
     const tableTitle = ["Nomor", "Nama Kelompok", "Status Kelompok", "Action"];
 
     return (

@@ -13,8 +13,6 @@ import { usePage } from "@inertiajs/react";
 export default function TugasAnswerShow({ auth }) {
     const { answers: answer } = usePage().props;
 
-    console.log(answer);
-
     return (
         <AuthenticatedLayout back userLogin={auth.user}>
             <div className="space-y-6">
