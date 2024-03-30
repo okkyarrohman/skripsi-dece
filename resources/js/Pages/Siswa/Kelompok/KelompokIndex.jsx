@@ -79,7 +79,7 @@ export default function KelompokIndex({ auth }) {
                         <TableContainer>
                             <TableHead datas={tableTitle} />
                             <TableBody>
-                                {filteredKelompoks.map((kelompok, index) => {
+                                {kelompoks.map((kelompok, index) => {
                                     const disableCondition =
                                         auth.user.kelompok_id != null ||
                                         kelompok.members.length >=
@@ -108,7 +108,9 @@ export default function KelompokIndex({ auth }) {
                                                         <PrimaryButton
                                                             style="small"
                                                             disabled={
-                                                                disableCondition
+                                                                disableCondition ||
+                                                                kelompok.is_active ==
+                                                                    "N"
                                                             }
                                                             className="mx-auto"
                                                         >
