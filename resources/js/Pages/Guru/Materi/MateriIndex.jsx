@@ -5,6 +5,7 @@ import TableData from "@/Components/atoms/Table/TableData";
 import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
 import ActionButton from "@/Components/molecules/Button/ActionButton";
+import NoData from "@/Components/molecules/NoData/NoData";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Link, usePage } from "@inertiajs/react";
 
@@ -21,43 +22,49 @@ export default function MateriIndex({ auth }) {
                         Tambah Materi
                     </PrimaryButton>
                 </Link>
-
-                <TableContainer>
-                    <TableHead datas={tableTitle} />
-                    <TableBody>
-                        {materis.map((materi, index) => {
-                            return (
-                                <TableRow key={index}>
-                                    <TableData children={index + 1} />
-                                    <TableData
-                                        children={materi.name}
-                                        align="text-left"
-                                        nowrap
-                                    />
-                                    <TableData
-                                        children={materi.slug}
-                                        align="text-left"
-                                    />
-                                    <TableData
-                                        children={
-                                            <ActionButton
-                                                onEdit={route(
-                                                    "materi-guru.edit",
-                                                    materi.id
-                                                )}
-                                                onDelete={route(
-                                                    "materi-guru.destroy",
-                                                    materi.id
-                                                )}
-                                            />
-                                        }
-                                        nowrap
-                                    />
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </TableContainer>
+                {materis.length == 0 ? (
+                    <NoData
+                        title="Belum Terdapat Materi"
+                        desc="Tambahkan materi segera!"
+                    />
+                ) : (
+                    <TableContainer>
+                        <TableHead datas={tableTitle} />
+                        <TableBody>
+                            {materis.map((materi, index) => {
+                                return (
+                                    <TableRow key={index}>
+                                        <TableData children={index + 1} />
+                                        <TableData
+                                            children={materi.name}
+                                            align="text-left"
+                                            nowrap
+                                        />
+                                        <TableData
+                                            children={materi.slug}
+                                            align="text-left"
+                                        />
+                                        <TableData
+                                            children={
+                                                <ActionButton
+                                                    onEdit={route(
+                                                        "materi-guru.edit",
+                                                        materi.id
+                                                    )}
+                                                    onDelete={route(
+                                                        "materi-guru.destroy",
+                                                        materi.id
+                                                    )}
+                                                />
+                                            }
+                                            nowrap
+                                        />
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </TableContainer>
+                )}
             </div>
         </AuthenticatedLayout>
     );

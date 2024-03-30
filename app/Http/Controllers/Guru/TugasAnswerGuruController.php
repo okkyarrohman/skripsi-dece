@@ -110,7 +110,7 @@ class TugasAnswerGuruController extends Controller
         $kelompoks = Kelompok::all();
 
         $answers = TugasAnswer::where('tugas_id', $id)->with(['tugas', 'users.kelompoks'])->get();
-        
+
         return Inertia::render('Guru/TugasAnswer/TugasAnswerJawabanSiswa', compact('kelompoks', 'answers'));
     }
 }

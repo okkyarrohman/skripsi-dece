@@ -6,6 +6,7 @@ import TableData from "@/Components/atoms/Table/TableData";
 import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
 import ActionButton from "@/Components/molecules/Button/ActionButton";
+import NoData from "@/Components/molecules/NoData/NoData";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Link, usePage } from "@inertiajs/react";
 
@@ -30,50 +31,58 @@ export default function TugasIndex({ auth }) {
                         Tambah Tugas Kelompok
                     </PrimaryButton>
                 </Link>
-
-                <TableContainer>
-                    <TableHead datas={tableTitle} />
-                    <TableBody>
-                        {tugases.map((tugas, index) => {
-                            return (
-                                <TableRow key={index}>
-                                    <TableData children={index + 1} />
-                                    <TableData
-                                        children={tugas.name}
-                                        align="text-left"
-                                    />
-                                    <TableData
-                                        children={tugas.kelompoks.name}
-                                        align="text-left"
-                                    />
-                                    <TableData
-                                        children={
-                                            <Status
-                                                active={tugas.is_active == "Y"}
-                                                activeStatus="Aktif"
-                                                nonactiveStatus="Nonaktif"
-                                            />
-                                        }
-                                    />
-                                    <TableData
-                                        children={
-                                            <ActionButton
-                                                onEdit={route(
-                                                    "tugas-guru.edit",
-                                                    tugas.id
-                                                )}
-                                                onDelete={route(
-                                                    "tugas-guru.destroy",
-                                                    tugas.id
-                                                )}
-                                            />
-                                        }
-                                    />
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </TableContainer>
+                {tugases.length == 0 ? (
+                    <NoData
+                        title="Belum Terdapat Tugas"
+                        desc="Tambahkan tugas segera!"
+                    />
+                ) : (
+                    <TableContainer>
+                        <TableHead datas={tableTitle} />
+                        <TableBody>
+                            {tugases.map((tugas, index) => {
+                                return (
+                                    <TableRow key={index}>
+                                        <TableData children={index + 1} />
+                                        <TableData
+                                            children={tugas.name}
+                                            align="text-left"
+                                        />
+                                        <TableData
+                                            children={tugas.kelompoks.name}
+                                            align="text-left"
+                                        />
+                                        <TableData
+                                            children={
+                                                <Status
+                                                    active={
+                                                        tugas.is_active == "Y"
+                                                    }
+                                                    activeStatus="Aktif"
+                                                    nonactiveStatus="Nonaktif"
+                                                />
+                                            }
+                                        />
+                                        <TableData
+                                            children={
+                                                <ActionButton
+                                                    onEdit={route(
+                                                        "tugas-guru.edit",
+                                                        tugas.id
+                                                    )}
+                                                    onDelete={route(
+                                                        "tugas-guru.destroy",
+                                                        tugas.id
+                                                    )}
+                                                />
+                                            }
+                                        />
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </TableContainer>
+                )}
             </div>
         </AuthenticatedLayout>
     );

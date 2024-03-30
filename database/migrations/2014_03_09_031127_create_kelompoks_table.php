@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('capacity');
+            $table->integer('average_grade')->default(0)->nullable();
             $table->string('is_active');
             $table->timestamps();
         });

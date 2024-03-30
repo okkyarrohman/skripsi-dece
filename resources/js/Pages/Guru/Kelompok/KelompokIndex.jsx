@@ -6,6 +6,7 @@ import TableData from "@/Components/atoms/Table/TableData";
 import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
 import ActionButton from "@/Components/molecules/Button/ActionButton";
+import NoData from "@/Components/molecules/NoData/NoData";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Link, usePage } from "@inertiajs/react";
 
@@ -25,56 +26,64 @@ export default function KelompokIndex({ auth }) {
                     </PrimaryButton>
                 </Link>
 
-                <TableContainer>
-                    <TableHead datas={tableTitle} />
-                    <TableBody>
-                        {kelompoks.map((kelompok, index) => {
-                            const memberOnline = kelompok.members.filter(
-                                (member) => member.session_login_at != null
-                            );
+                {kelompoks.length == 0 ? (
+                    <NoData
+                        title="Belum Terdapat Kelompok"
+                        desc="Tambahkan kelompok segera!"
+                    />
+                ) : (
+                    <TableContainer>
+                        <TableHead datas={tableTitle} />
+                        <TableBody>
+                            {kelompoks.map((kelompok, index) => {
+                                const memberOnline = kelompok.members.filter(
+                                    (member) => member.session_login_at != null
+                                );
 
-                            return (
-                                <TableRow key={index}>
-                                    <TableData children={index + 1} />
-                                    <TableData
-                                        children={kelompok.name}
-                                        align="text-left"
-                                    />
-                                    <TableData
-                                        children={
-                                            <Status
-                                                active={
-                                                    kelompok.is_active == "Y"
-                                                }
-                                                activeStatus="Aktif"
-                                                nonactiveStatus="Nonaktif"
-                                            />
-                                        }
-                                    />
-                                    <TableData
-                                        children={
-                                            <ActionButton
-                                                view
-                                                onEdit={route(
-                                                    "kelompok-guru.edit",
-                                                    kelompok.id
-                                                )}
-                                                onView={route(
-                                                    "kelompok-guru.show",
-                                                    kelompok.id
-                                                )}
-                                                onDelete={route(
-                                                    "kelompok-guru.destroy",
-                                                    kelompok.id
-                                                )}
-                                            />
-                                        }
-                                    />
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </TableContainer>
+                                return (
+                                    <TableRow key={index}>
+                                        <TableData children={index + 1} />
+                                        <TableData
+                                            children={kelompok.name}
+                                            align="text-left"
+                                        />
+                                        <TableData
+                                            children={
+                                                <Status
+                                                    active={
+                                                        kelompok.is_active ==
+                                                        "Y"
+                                                    }
+                                                    activeStatus="Aktif"
+                                                    nonactiveStatus="Nonaktif"
+                                                />
+                                            }
+                                        />
+                                        <TableData
+                                            children={
+                                                <ActionButton
+                                                    view
+                                                    onEdit={route(
+                                                        "kelompok-guru.edit",
+                                                        kelompok.id
+                                                    )}
+                                                    onView={route(
+                                                        "kelompok-guru.show",
+                                                        kelompok.id
+                                                    )}
+                                                    onDelete={route(
+                                                        "kelompok-guru.destroy",
+                                                        kelompok.id
+                                                    )}
+                                                />
+                                            }
+                                        />
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </TableContainer>
+                )}
             </div>
         </AuthenticatedLayout>
     );

@@ -6,6 +6,7 @@ import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
 import Banner from "@/Components/molecules/Banner/Banner";
 import BannerJoined from "@/Components/molecules/Banner/BannerJoinned";
+import NoData from "@/Components/molecules/NoData/NoData";
 import IconTitle from "@/Components/molecules/Text/IconTitle";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Link, usePage } from "@inertiajs/react";
@@ -69,58 +70,63 @@ export default function KelompokIndex({ auth }) {
                             />
                         </svg>
                     </IconTitle>
+                    {kelompoks.length == 0 ? (
+                        <NoData
+                            title="Belum Terdapat Kelompok"
+                            desc="Guru belum menambahkan kelompok!"
+                        />
+                    ) : (
+                        <TableContainer>
+                            <TableHead datas={tableTitle} />
+                            <TableBody>
+                                {filteredKelompoks.map((kelompok, index) => {
+                                    const disableCondition =
+                                        auth.user.kelompok_id != null ||
+                                        kelompok.members.length >=
+                                            kelompok.capacity;
 
-                    {/* Table */}
-                    <TableContainer>
-                        <TableHead datas={tableTitle} />
-                        <TableBody>
-                            {filteredKelompoks.map((kelompok, index) => {
-                                const disableCondition =
-                                    auth.user.kelompok_id != null ||
-                                    kelompok.members.length >=
-                                        kelompok.capacity;
-
-                                return (
-                                    <TableRow>
-                                        <TableData children={index + 1} />
-                                        <TableData
-                                            children={kelompok.name}
-                                            align="text-left"
-                                        />
-                                        <TableData
-                                            children={`${kelompok.members.length} / ${kelompok.capacity}`}
-                                        />
-                                        <TableData
-                                            children={
-                                                <Link
-                                                    as="button"
-                                                    method="PATCH"
-                                                    href={route(
-                                                        "kelompok.join",
-                                                        kelompok.id
-                                                    )}
-                                                >
-                                                    <PrimaryButton
-                                                        style="small"
-                                                        disabled={
-                                                            disableCondition
-                                                        }
-                                                        className="mx-auto"
+                                    return (
+                                        <TableRow>
+                                            <TableData children={index + 1} />
+                                            <TableData
+                                                children={kelompok.name}
+                                                align="text-left"
+                                            />
+                                            <TableData
+                                                children={`${kelompok.members.length} / ${kelompok.capacity}`}
+                                            />
+                                            <TableData
+                                                children={
+                                                    <Link
+                                                        as="button"
+                                                        method="PATCH"
+                                                        href={route(
+                                                            "kelompok.join",
+                                                            kelompok.id
+                                                        )}
                                                     >
-                                                        {auth.user
-                                                            .kelompok_id ==
-                                                        kelompok.id
-                                                            ? "Tergabung"
-                                                            : "Gabung"}
-                                                    </PrimaryButton>
-                                                </Link>
-                                            }
-                                        />
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </TableContainer>
+                                                        <PrimaryButton
+                                                            style="small"
+                                                            disabled={
+                                                                disableCondition
+                                                            }
+                                                            className="mx-auto"
+                                                        >
+                                                            {auth.user
+                                                                .kelompok_id ==
+                                                            kelompok.id
+                                                                ? "Tergabung"
+                                                                : "Gabung"}
+                                                        </PrimaryButton>
+                                                    </Link>
+                                                }
+                                            />
+                                        </TableRow>
+                                    );
+                                })}
+                            </TableBody>
+                        </TableContainer>
+                    )}
                 </div>
             </div>
         </AuthenticatedLayout>

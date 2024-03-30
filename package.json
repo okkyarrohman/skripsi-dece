@@ -20,6 +20,9 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "chart.js": "^4.4.2",
+        "react-calendar": "^4.8.0",
+        "react-chartjs-2": "^5.2.0",
         "react-qr-code": "^2.0.12"
     }
 }

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'kelas',
         'absen',
+        'photo',
         'role',
         'kelompok_id',
         'password',
