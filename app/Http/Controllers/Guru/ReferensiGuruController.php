@@ -98,16 +98,14 @@ class ReferensiGuruController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
             'description' => 'required|string',
-            'file' => 'required|file|mimes:pdf|max:2048',
+            'file' => 'required',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
             'slug.required' => 'Slug tidak boleh kosong',
             'description.required' => 'Deskripsi tidak boleh kosong',
             'file.required' => 'File harus diunggah',
-            'file.mimes' => 'File harus berupa format PDF',
-            'file.max' => 'Ukuran file tidak boleh melebihi 2MB',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }

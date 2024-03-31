@@ -64,7 +64,9 @@ class AbsenGuruController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('Guru/Absen/AbsenShow');
+        $absens = Absen::where('id', $id)->with(['presents.users.kelompoks'])->first();
+
+        return Inertia::render('Guru/Absen/AbsenShow', compact('absens'));
     }
 
     /**
@@ -83,7 +85,7 @@ class AbsenGuruController extends Controller
     public function update(Request $request, string $id)
     {
         $absens = Absen::find($id);
-        
+
         $validator = Validator::make($request->all(), [
             'is_active' => 'required',
             'name' => 'required|string|max:255',
