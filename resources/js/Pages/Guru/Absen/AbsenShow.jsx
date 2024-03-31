@@ -10,7 +10,7 @@ import { formattedDate } from "@/utils/helper";
 import { usePage } from "@inertiajs/react";
 
 export default function AbsenShow({ auth }) {
-    const { absens } = usePage().props;
+    const { users, absens } = usePage().props;
 
     const tableTitle = [
         "Nomor",
@@ -18,8 +18,6 @@ export default function AbsenShow({ auth }) {
         "Nama Kelompok",
         "Status Absensi",
     ];
-
-    console.log(absens);
 
     return (
         <AuthenticatedLayout back userLogin={auth.user}>
@@ -55,7 +53,7 @@ export default function AbsenShow({ auth }) {
                 <TableContainer>
                     <TableHead datas={tableTitle} />
                     <TableBody>
-                        {absens.presents.map((user, index) => {
+                        {/* {absens.presents.map((user, index) => {
                             return (
                                 <TableRow key={index}>
                                     <TableData children={index + 1} />
@@ -72,6 +70,37 @@ export default function AbsenShow({ auth }) {
                                                 activeStatus="Hadir"
                                                 nonactiveStatus="Tidak Hadir"
                                                 active
+                                            />
+                                        }
+                                    />
+                                </TableRow>
+                            );
+                        })} */}
+                        {users.map((user, index) => {
+                            const userPresent = absens.presents.find(
+                                (absen) => absen.user_id == user.id
+                            );
+
+                            return (
+                                <TableRow key={index}>
+                                    <TableData children={index + 1} />
+                                    <TableData
+                                        children={user.name}
+                                        align="text-left"
+                                    />
+                                    <TableData
+                                        children={
+                                            user.kelompok_id
+                                                ? user.kelompoks.name
+                                                : "Belum Gabung Kelompok"
+                                        }
+                                    />
+                                    <TableData
+                                        children={
+                                            <Status
+                                                activeStatus="Hadir"
+                                                nonactiveStatus="Tidak Hadir"
+                                                active={userPresent}
                                             />
                                         }
                                     />

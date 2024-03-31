@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use App\Models\Absen;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -64,9 +65,11 @@ class AbsenGuruController extends Controller
      */
     public function show(string $id)
     {
+        $users = User::where('role', 'siswa')->with(['kelompoks'])->get();
+
         $absens = Absen::where('id', $id)->with(['presents.users.kelompoks'])->first();
 
-        return Inertia::render('Guru/Absen/AbsenShow', compact('absens'));
+        return Inertia::render('Guru/Absen/AbsenShow', compact('users', 'absens'));
     }
 
     /**
