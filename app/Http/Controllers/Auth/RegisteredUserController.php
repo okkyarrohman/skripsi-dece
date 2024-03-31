@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\MonthlyLogin;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -66,6 +67,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         $user->assignRole('siswa');
+
+        MonthlyLogin::firstOrCreate([
+            'user_id' => $user->id
+        ]);
 
         event(new Registered($user));
 

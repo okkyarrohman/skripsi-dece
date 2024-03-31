@@ -136,6 +136,8 @@ export default function KelompokShow({ auth }) {
                                     grade={
                                         answeredTugas
                                             ? answeredTugas.grade
+                                                ? answeredTugas.grade
+                                                : "Belum Dinilai"
                                             : "Belum Dinilai"
                                     }
                                     disabled={tugas.is_active == "N"}

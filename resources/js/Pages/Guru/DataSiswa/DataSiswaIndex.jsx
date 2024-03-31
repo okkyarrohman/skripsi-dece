@@ -7,7 +7,7 @@ import TableHead from "@/Components/atoms/Table/TableHead";
 import TableRow from "@/Components/atoms/Table/TableRow";
 import NoData from "@/Components/molecules/NoData/NoData";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function DataSiswaIndex({ auth }) {
     const { users } = usePage().props;
@@ -46,12 +46,19 @@ export default function DataSiswaIndex({ auth }) {
                                         />
                                         <TableData
                                             children={
-                                                <PrimaryButton
-                                                    style="small"
-                                                    className="mx-auto"
+                                                <Link
+                                                    href={route(
+                                                        "data-siswa-guru.show",
+                                                        user.id
+                                                    )}
                                                 >
-                                                    Detail
-                                                </PrimaryButton>
+                                                    <PrimaryButton
+                                                        style="small"
+                                                        className="mx-auto"
+                                                    >
+                                                        Detail
+                                                    </PrimaryButton>
+                                                </Link>
                                             }
                                         />
                                     </TableRow>
