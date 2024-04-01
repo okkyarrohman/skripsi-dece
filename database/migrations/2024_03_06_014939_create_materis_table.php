@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('file');
             $table->longText('description');
+            $table->integer('seen_time')->default(0);
             $table->timestamps();
         });
     }

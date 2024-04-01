@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Kelompok;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -28,6 +29,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'kelas' => fake()->name(),
             'absen' => fake()->randomNumber(),
+            'kelompok_id' => Kelompok::inRandomOrder()->where('is_active', 'Y')->first()->id,
             'role' => 'siswa',
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),

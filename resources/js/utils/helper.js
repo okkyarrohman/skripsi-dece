@@ -13,9 +13,19 @@ export const formattedDate = (dateValue) => {
 };
 
 export const formattedNumber = (numberValue) => {
-    const formatNumber = String(numberValue + 1).padStart(2, "0");
+    const formatNumber = String(numberValue).padStart(2, "0");
 
     return formatNumber;
 };
 
-export const storageUrl = "http://127.0.0.1:8000/storage/";
+export const storageUrl = "http://127.0.0.1:8000/storage";
+
+export const checkDeadlinePassed = (date, time) => {
+    const [hours, minutes] = time.split(":").map(Number);
+    const deadlineDate = new Date(date);
+    deadlineDate.setHours(hours);
+    deadlineDate.setMinutes(minutes);
+    const currentDate = new Date();
+
+    return currentDate.getTime() >= deadlineDate.getTime();
+};

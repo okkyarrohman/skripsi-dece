@@ -2,16 +2,21 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Guru\AbsenGuruController;
+use App\Http\Controllers\Guru\DataSiswaController;
 use App\Http\Controllers\Guru\KelompokGuruController;
 use App\Http\Controllers\Guru\MateriGuruController;
 use App\Http\Controllers\Guru\ReferensiGuruController;
+use App\Http\Controllers\Guru\TugasAnswerGuruController;
 use App\Http\Controllers\Guru\TugasGuruController;
 use App\Http\Controllers\Guru\TutorialGuruController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Siswa\AbsenController;
+use App\Http\Controllers\Siswa\AbsenPresentController;
+use App\Http\Controllers\Siswa\KegiatanController;
 use App\Http\Controllers\Siswa\KelompokController;
 use App\Http\Controllers\Siswa\MateriController;
 use App\Http\Controllers\Siswa\ReferensiController;
+use App\Http\Controllers\Siswa\TugasAnswerController;
 use App\Http\Controllers\Siswa\TugasController;
 use App\Http\Controllers\Siswa\TutorialController;
 use Illuminate\Foundation\Application;
@@ -46,11 +51,17 @@ Route::group(['middleware' => 'role:guru'], function () {
         Route::resources([
             'materi-guru' => MateriGuruController::class,
             'tugas-guru' => TugasGuruController::class,
+            'tugas-answer-guru' => TugasAnswerGuruController::class,
             'referensi-guru' => ReferensiGuruController::class,
             'tutorial-guru' => TutorialGuruController::class,
             'kelompok-guru' => KelompokGuruController::class,
-            'absensi-guru' => AbsenGuruController::class,
+            'absen-guru' => AbsenGuruController::class,
+            'data-siswa-guru' => DataSiswaController::class
         ]);
+        Route::get('/tugas-answer-guru/jawaban-siswa/{id}', [TugasAnswerGuruController::class, 'jawabanSiswa'])->name('tugas-answer-guru.jawabanSiswa');
+        Route::get('/panduan-guru', function () {
+            return Inertia::render('Guru/Panduan');
+        })->name('panduan-guru');
     });
 });
 
@@ -62,13 +73,29 @@ Route::group(['middleware' => 'role:siswa'], function () {
         Route::resources([
             'materi' => MateriController::class,
             'tugas' => TugasController::class,
+            'tugas-answer' => TugasAnswerController::class,
             'referensi' => ReferensiController::class,
             'tutorial' => TutorialController::class,
             'kelompok' => KelompokController::class,
             'absen' => AbsenController::class,
+            'absen-present' => AbsenPresentController::class,
+            'kegiatan' => KegiatanController::class
         ]);
         Route::post('/materi/{id}/seen', [MateriController::class, 'markSeen'])->name('materi.markSeen');
+        Route::post('/referensi/{id}/seen', [ReferensiController::class, 'markSeen'])->name('referensi.markSeen');
+        Route::patch('/kelompok/{id}/join', [KelompokController::class, 'join'])->name('kelompok.join');
+        Route::get('/absen/{id}/present', [AbsenPresentController::class, 'present'])->middleware('auth')->name('absen-present.present');
+        Route::post('/absen/{id}/present', [AbsenPresentController::class, 'present'])->name('absen-present.present');
+        Route::get('/panduan', function () {
+            return Inertia::render('Siswa/Panduan');
+        })->name('panduan');
     });
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/edit-profil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/edit-profil', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/edit-profil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';

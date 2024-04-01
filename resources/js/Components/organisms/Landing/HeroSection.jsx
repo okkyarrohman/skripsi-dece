@@ -6,7 +6,7 @@ export default function HeroSection({ userLogin }) {
     return (
         <section
             id="homeSection"
-            className="h-screen w-screen bg-gray-50 flex flex-col items-center justify-center space-y-6 overflow-hidden relative"
+            className="h-screen w-screen bg-gray-50 flex flex-col items-center justify-center space-y-6 overflow-hidden relative md:px-0 px-6"
         >
             <LandingHeroTitle />
             <div className="relative z-10">

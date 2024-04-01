@@ -8,11 +8,11 @@ export default function AboutSection({ userLogin }) {
     return (
         <section
             id="aboutSection"
-            className="min-h-screen w-screen bg-abu-50 flex flex-col justify-center items-center bg-gray-50"
+            className="min-h-screen w-screen md:py-0 py-10 bg-abu-50 flex flex-col justify-center items-center bg-gray-50 md:px-0 px-6"
         >
-            <div className="flex items-center justify-center gap-16">
+            <div className="flex md:flex-row flex-col items-center justify-center gap-16">
                 <LandingAboutImage />
-                <div className="w-1/2 space-y-6">
+                <div className="md:w-1/2 w-full space-y-6">
                     <LandingTitle align="text-left">
                         Menyajikan konten pembelajaran langsung dari guru
                     </LandingTitle>

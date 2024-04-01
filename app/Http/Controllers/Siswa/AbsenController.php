@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Absen;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AbsenController extends Controller
 {
@@ -12,7 +14,9 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        //
+        $absens = Absen::with(['presents'])->get();
+
+        return Inertia::render('Siswa/Absen/AbsenIndex', compact('absens'));
     }
 
     /**
