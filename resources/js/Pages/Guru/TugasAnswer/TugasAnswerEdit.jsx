@@ -1,5 +1,7 @@
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
+import DropdownContainer from "@/Components/atoms/Dropdown/DropdownContainer";
+import DropdownOption from "@/Components/atoms/Dropdown/DropdownOption";
 import InputText from "@/Components/atoms/Input/InputText";
 import InputTextArea from "@/Components/atoms/Input/InputTextArea";
 import Label from "@/Components/atoms/Label/Label";
@@ -11,6 +13,7 @@ import TugasAnswerGrade from "@/Components/organisms/TugasAnswer/TugasAnswerGrad
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { storageUrl } from "@/utils/helper";
 import { useForm, usePage } from "@inertiajs/react";
+import { useState } from "react";
 
 export default function TugasAnswerEdit({ auth }) {
     const { answers: answer } = usePage().props;
@@ -22,9 +25,34 @@ export default function TugasAnswerEdit({ auth }) {
         feedback: answer.feedback,
     });
 
+    const [open, setOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(
+        answer.grade_category ? answer.grade_category : ""
+    );
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
         post(route("tugas-answer-guru.update", answer.id));
+    };
+
+    const handleDropdownOnClick = () => {
+        setOpen(!open);
+    };
+
+    const handleOptionSelect = (option) => {
+        if (option == "A") {
+            setSelectedOption("A");
+        } else if (option == "B") {
+            setSelectedOption("B");
+        } else if (option == "C") {
+            setSelectedOption("C");
+        } else if (option == "D") {
+            setSelectedOption("D");
+        } else {
+            setSelectedOption("E");
+        }
+        setData("grade_category", option);
+        setOpen(!open);
     };
 
     return (
@@ -101,16 +129,35 @@ export default function TugasAnswerEdit({ auth }) {
                                 htmlFor="grade_category"
                                 text="Kategori Penilaian"
                             />
-                            <InputText
-                                name="grade_category"
-                                placeholder="Kategori Nilai Tugas..."
-                                value={data.grade_category}
-                                onChange={(e) =>
-                                    setData("grade_category", e.target.value)
-                                }
-                            />
+                            <DropdownContainer
+                                onClick={handleDropdownOnClick}
+                                opened={open}
+                                selectedOption={selectedOption}
+                                unselectedOption="Pilih Kategori Nilai"
+                            >
+                                <DropdownOption
+                                    option="A (81-100)"
+                                    onSelect={() => handleOptionSelect("A")}
+                                />
+                                <DropdownOption
+                                    option="B (61-80)"
+                                    onSelect={() => handleOptionSelect("B")}
+                                />
+                                <DropdownOption
+                                    option="C (41-60)"
+                                    onSelect={() => handleOptionSelect("C")}
+                                />
+                                <DropdownOption
+                                    option="D (21-40)"
+                                    onSelect={() => handleOptionSelect("D")}
+                                />
+                                <DropdownOption
+                                    option="E (0-20)"
+                                    onSelect={() => handleOptionSelect("E")}
+                                />
+                            </DropdownContainer>
                             <InputError
-                                message={errors.grade}
+                                message={errors.grade_category}
                                 className="mt-2"
                             />
                         </div>
@@ -125,7 +172,7 @@ export default function TugasAnswerEdit({ auth }) {
                                 }
                             />
                             <InputError
-                                message={errors.grade}
+                                message={errors.feedback}
                                 className="mt-2"
                             />
                         </div>
