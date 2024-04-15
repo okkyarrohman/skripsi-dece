@@ -10,13 +10,24 @@ export default function DashboardKegiatan({ kegiatan, children, markedDates }) {
 
     const tileContent = ({ date, view }) => {
         if (view === "month") {
-            const isMarked = markedDates.find(
-                (markedDate) =>
-                    markedDate.toDateString() === date.toDateString()
-            );
-            return isMarked ? (
-                <div className="bg-orange-500 size-3 rounded-full mx-auto"></div>
-            ) : null;
+            // const isMarked = markedDates.find(
+            //     (markedDate) =>
+            //         markedDate.toDateString() === date.toDateString()
+            // );
+            const isMarked = markedDates.filter(({ date_start, date_end }) => {
+                const startDate = new Date(date_start);
+                const endDate = new Date(date_end);
+                return date >= startDate && date <= endDate;
+            });
+            // return isMarked ? (
+            //     <div className="bg-orange-500 size-3 rounded-full mx-auto"></div>
+            // ) : null;
+            return isMarked.map(({ id }) => (
+                <div
+                    key={id}
+                    className={`bg-orange-500 size-3 rounded-full mt-1 mx-auto`}
+                ></div>
+            ));
         }
     };
 

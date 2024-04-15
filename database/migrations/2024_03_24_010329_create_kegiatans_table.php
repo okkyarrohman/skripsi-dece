@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('kegiatans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('date');
-            $table->time('time');
+            $table->date('date_start');
+            $table->time('time_start');
+            $table->date('date_end');
+            $table->time('time_end');
             $table->string('is_active');
             $table->timestamps();
         });

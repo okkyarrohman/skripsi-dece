@@ -20,8 +20,10 @@ export default function KegiatanEdit({ auth }) {
     const { data, setData, post, errors } = useForm({
         _method: "patch",
         name: kegiatans.name,
-        date: kegiatans.date,
-        time: kegiatans.time,
+        date_start: kegiatans.date_start,
+        time_start: kegiatans.time_start,
+        date_end: kegiatans.date_end,
+        time_end: kegiatans.time_end,
         is_active: kegiatans.is_active,
     });
 
@@ -81,27 +83,85 @@ export default function KegiatanEdit({ auth }) {
                         />
                         <InputError message={errors.name} className="mt-2" />
                     </div>
-                    <div>
-                        <Label htmlFor="date" text="Tanggal Kegiatan" />
-                        <InputText
-                            type="date"
-                            name="date"
-                            placeholder="Tanggal Kegiatan..."
-                            value={data.date}
-                            onChange={(e) => setData("date", e.target.value)}
-                        />
-                        <InputError message={errors.date} className="mt-2" />
+                    <div className="flex justify-between gap-6">
+                        <div className="w-full">
+                            <Label
+                                htmlFor="date_start"
+                                text="Tanggal Mulai Kegiatan"
+                            />
+                            <InputText
+                                type="date"
+                                name="date_start"
+                                placeholder="Tanggal Kegiatan..."
+                                value={data.date_start}
+                                onChange={(e) =>
+                                    setData("date_start", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.date_start}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div className="w-full">
+                            <Label
+                                htmlFor="time_start"
+                                text="Waktu Mulai Kegiatan"
+                            />
+                            <InputText
+                                type="time"
+                                name="time_start"
+                                placeholder="Waktu Kegiatan..."
+                                value={data.time_start}
+                                onChange={(e) =>
+                                    setData("time_start", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.time_start}
+                                className="mt-2"
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <Label htmlFor="time" text="Waktu Kegiatan" />
-                        <InputText
-                            type="time"
-                            name="time"
-                            placeholder="Waktu Kegiatan..."
-                            value={data.time}
-                            onChange={(e) => setData("time", e.target.value)}
-                        />
-                        <InputError message={errors.time} className="mt-2" />
+                    <div className="flex justify-between gap-6">
+                        <div className="w-full">
+                            <Label
+                                htmlFor="date_end"
+                                text="Tanggal Berakhir Kegiatan"
+                            />
+                            <InputText
+                                type="date"
+                                name="date_end"
+                                placeholder="Tanggal Kegiatan..."
+                                value={data.date_end}
+                                onChange={(e) =>
+                                    setData("date_end", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.date_end}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div className="w-full">
+                            <Label
+                                htmlFor="time_end"
+                                text="Waktu Berakhir Kegiatan"
+                            />
+                            <InputText
+                                type="time"
+                                name="time_end"
+                                placeholder="Waktu Kegiatan..."
+                                value={data.time_end}
+                                onChange={(e) =>
+                                    setData("time_end", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.time_end}
+                                className="mt-2"
+                            />
+                        </div>
                     </div>
                     <div>
                         <Label htmlFor="is_active" text="Status Kegiatan" />

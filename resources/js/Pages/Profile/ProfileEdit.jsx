@@ -53,7 +53,7 @@ export default function ProfileEdit({ auth }) {
     };
 
     return (
-        <AuthenticatedLayout back userLogin={auth.user}>
+        <AuthenticatedLayout back toDashboard userLogin={auth.user}>
             <div className="space-y-6">
                 <div className="p-6 rounded-xl bg-gray-50">
                     <form
@@ -140,7 +140,7 @@ export default function ProfileEdit({ auth }) {
                                     name="email"
                                     placeholder="Email..."
                                     value={data.email}
-                                    disabled
+                                    // disabled
                                     onChange={(e) =>
                                         setData("email", e.target.value)
                                     }

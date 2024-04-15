@@ -53,8 +53,12 @@ export default function KegiatanIndex({ auth }) {
                                     />
                                     <TableData
                                         children={`${formattedDate(
-                                            kegiatan.date
-                                        )} ${kegiatan.time}`}
+                                            kegiatan.date_start
+                                        )} ${
+                                            kegiatan.time_start
+                                        } - ${formattedDate(
+                                            kegiatan.date_end
+                                        )} ${kegiatan.time_end}`}
                                     />
                                     <TableData
                                         children={

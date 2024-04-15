@@ -36,16 +36,21 @@ class KegiatanController extends Controller
         $validator = Validator::make($request->all(), [
             'is_active' => 'required',
             'name' => 'required|string|max:255',
-            'date' => 'required|date' ,
-            'time' => 'required' ,
+            'date_start' => 'required|date' ,
+            'time_start' => 'required' ,
+            'date_end' => 'required|date' ,
+            'time_end' => 'required' ,
         ], [
             'is_active.required' => 'Status kelompok harus dipilih',
             'name.required' => 'Nama tidak boleh kosong',
             'name.string' => 'Nama harus berupa teks',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
-            'date.required' => 'Tanggal tidak boleh kosong',
-            'date.date' => 'Tanggal harus berupa tanggal',
-            'time.required' => 'Waktu tidak boleh kosong',
+            'date_start.required' => 'Tanggal mulai tidak boleh kosong',
+            'date_start.date' => 'Tanggal mulai harus berupa tanggal',
+            'time_start.required' => 'Waktu mulai tidak boleh kosong',
+            'date_end.required' => 'Tanggal berakhir tidak boleh kosong',
+            'date_end.date' => 'Tanggal berakhir harus berupa tanggal',
+            'time_end.required' => 'Waktu berakhir tidak boleh kosong',
         ]);
 
         if ($validator->fails()) {
@@ -54,8 +59,10 @@ class KegiatanController extends Controller
 
         Kegiatan::create([
             'name' => $request->input('name'),
-            'date' => $request->input('date'),
-            'time' => $request->input('time'),
+            'date_start' => $request->input('date_start'),
+            'time_start' => $request->input('time_start'),
+            'date_end' => $request->input('date_end'),
+            'time_end' => $request->input('time_end'),
             'is_active' => $request->input('is_active'),
         ]);
 
@@ -88,16 +95,21 @@ class KegiatanController extends Controller
         $validator = Validator::make($request->all(), [
             'is_active' => 'required',
             'name' => 'required|string|max:255',
-            'date' => 'required|date' ,
-            'time' => 'required' ,
+            'date_start' => 'required|date' ,
+            'time_start' => 'required' ,
+            'date_end' => 'required|date' ,
+            'time_end' => 'required' ,
         ], [
             'is_active.required' => 'Status kelompok harus dipilih',
             'name.required' => 'Nama tidak boleh kosong',
             'name.string' => 'Nama harus berupa teks',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
-            'date.required' => 'Tanggal tidak boleh kosong',
-            'date.date' => 'Tanggal harus berupa tanggal',
-            'time.required' => 'Waktu tidak boleh kosong',
+            'date_start.required' => 'Tanggal mulai tidak boleh kosong',
+            'date_start.date' => 'Tanggal mulai harus berupa tanggal',
+            'time_start.required' => 'Waktu mulai tidak boleh kosong',
+            'date_end.required' => 'Tanggal berakhir tidak boleh kosong',
+            'date_end.date' => 'Tanggal berakhir harus berupa tanggal',
+            'time_end.required' => 'Waktu berakhir tidak boleh kosong',
         ]);
 
         if ($validator->fails()) {

@@ -13,7 +13,10 @@ class Kegiatan extends Model
 
     protected $fillable = [
         'name',
-        'date',
+        'date_start',
+        'time_start',
+        'date_end',
+        'time_end',
         'time',
         'is_active'
     ];

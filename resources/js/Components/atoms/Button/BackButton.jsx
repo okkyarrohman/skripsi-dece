@@ -1,14 +1,18 @@
 import { Link } from "@inertiajs/react";
 
-export default function BackButton() {
+export default function BackButton({ toDashboard, userRole }) {
     const handleBackOnClick = () => {
         window.history.go(-1);
     };
 
+    const dashboardRoute =
+        userRole == "guru" ? "dashboard.guru" : "dashboard.siswa";
+
     return (
         <Link
             as="button"
-            onClick={handleBackOnClick}
+            onClick={toDashboard ? console.log("") : handleBackOnClick}
+            href={toDashboard ? route(dashboardRoute) : null}
             className="flex items-center gap-1"
         >
             <svg

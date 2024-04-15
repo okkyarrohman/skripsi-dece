@@ -8,12 +8,20 @@ export default function AuthenticatedLayout({
     children,
     title,
     back = false,
+    toDashboard = false,
 }) {
     return (
         <>
             <Sidebar userLogin={userLogin} />
             <UserNavbar userLogin={userLogin}>
-                {back ? <BackButton /> : <Title title={title} />}
+                {back ? (
+                    <BackButton
+                        toDashboard={toDashboard}
+                        userRole={userLogin.role}
+                    />
+                ) : (
+                    <Title title={title} />
+                )}
             </UserNavbar>
             <div className="md:pl-72 md:pt-24">
                 <div className="p-8 w-full h-full">{children}</div>

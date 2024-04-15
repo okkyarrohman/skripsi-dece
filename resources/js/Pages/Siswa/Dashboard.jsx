@@ -1,17 +1,12 @@
-import PrimaryButton from "@/Components/atoms/Button/PrimaryButton";
 import DashboardGreet from "@/Components/molecules/Dashboard/DashboardGreet";
 import KegiatanItem from "@/Components/molecules/Kegiatan/KegiatanItem";
 import MateriItem from "@/Components/molecules/Materi.jsx/MateriItem";
-import IconTitle from "@/Components/molecules/Text/IconTitle";
 import DashboardAbsensi from "@/Components/organisms/Dashboard/DashboardAbsensi";
 import DashboardChartTotalLogin from "@/Components/organisms/Dashboard/DashboardChartTotalLogin";
 import DashboardKegiatan from "@/Components/organisms/Dashboard/DashboardKegiatan";
 import DashboardMateri from "@/Components/organisms/Dashboard/DashboardMateri";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { formattedDate } from "@/utils/helper";
-import { Link, usePage } from "@inertiajs/react";
-import { useState } from "react";
-import Calendar from "react-calendar";
+import { usePage } from "@inertiajs/react";
 import "react-calendar/dist/Calendar.css";
 
 export default function Dashboard({ auth }) {
@@ -22,7 +17,11 @@ export default function Dashboard({ auth }) {
         monthlyLogins,
     } = usePage().props;
 
-    const markedDates = kegiatans.map((kegiatan) => new Date(kegiatan.date));
+    // const markedDates = kegiatans.map(
+    //     (kegiatan) => new Date(kegiatan.date_start)
+    // );
+
+    // console.log(markedDates);
 
     const currentAbsenByUserId =
         absen &&
@@ -86,7 +85,7 @@ export default function Dashboard({ auth }) {
                 <div className="col-span-6 space-y-6">
                     <DashboardChartTotalLogin data={data} />
                     <DashboardKegiatan
-                        markedDates={markedDates}
+                        markedDates={kegiatans}
                         kegiatan={kegiatans.length != 0}
                     >
                         {kegiatans.map((kegiatan, index) => {
@@ -94,8 +93,8 @@ export default function Dashboard({ auth }) {
                                 <KegiatanItem
                                     key={index}
                                     name={kegiatan.name}
-                                    date={kegiatan.date}
-                                    time={kegiatan.time}
+                                    date={kegiatan.date_end}
+                                    time={kegiatan.time_end}
                                 />
                             );
                         })}
