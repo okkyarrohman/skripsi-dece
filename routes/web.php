@@ -43,6 +43,12 @@ Route::get('/', function () {
     ]);
 })->name('landing');
 
+Route::get('/link', function () {
+    $target = '/home/jagoconf/jagoconfig/storage/app/public';
+    $shortcut = '/home/jagoconf/public_html/storage';
+    symlink($target, $shortcut);
+});
+
 // Route Guru
 Route::group(['middleware' => 'role:guru'], function () {
     Route::prefix('guru')->group(function () {
