@@ -7,7 +7,7 @@ export default function LandingHeroTitle({ desc }) {
             <div className="md:w-3/5 w-full">
                 <LandingTitle>
                     Belajar Bersama{" "}
-                    <span className="text-orange-500">Jarot</span> Untuk
+                    <span className="text-orange-500">Joni</span> Untuk
                     Tingkatkan Skillmu
                 </LandingTitle>
             </div>
@@ -15,7 +15,7 @@ export default function LandingHeroTitle({ desc }) {
                 <Description
                     size="text-2xl"
                     align="text-center"
-                    desc="Figma ipsum component variant main layer. Distribute horizontal polygon effect ipsum scale reesizing"
+                    desc="Raih kemudahan belajar yang menyenangkan untuk membantumu memahami konsep-konsep dasar hingga teknik konfigurasi jaringan yang lebih kompleks"
                 />
             </div>
         </>

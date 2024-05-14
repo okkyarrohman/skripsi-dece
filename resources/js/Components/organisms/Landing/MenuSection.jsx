@@ -9,24 +9,25 @@ export default function MenuSection() {
         >
             <div className="md:w-3/5 w-full">
                 <LandingTitle color="text-white">
-                    Figma ipsum component variant main layer. Content flows text
+                    Tingkatkan Pengalaman Belajar dengan{" "}
+                    <span className="text-black">Fitur Terbaik</span> Joni
                 </LandingTitle>
             </div>
             <div className="flex md:flex-row flex-col md:gap-0 gap-6 justify-evenly w-full">
                 <LandingMenuCard
                     image="/assets/materi-icon.png"
                     title="Materi"
-                    desc="Materi terstuktur untuk mata pelajaran jaringan komputer"
+                    desc="Kemudahan Mengakses Materi Pembelajaran "
                 />
                 <LandingMenuCard
                     image="/assets/kelompok-icon.png"
                     title="Kelompok"
-                    desc="Materi terstuktur untuk mata pelajaran jaringan komputer"
+                    desc="Lebih Mudah Mengerjakan Tugas Bersama Teman-Teman"
                 />
                 <LandingMenuCard
                     image="/assets/referensi-icon.png"
-                    title="Referensi"
-                    desc="Materi terstuktur untuk mata pelajaran jaringan komputer"
+                    title="Akses Realtime"
+                    desc="Nikmati Akses Absensi hingga Penilaian Secara Realtime"
                 />
             </div>
         </section>

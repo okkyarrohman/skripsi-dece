@@ -14,11 +14,15 @@ export default function AboutSection({ userLogin }) {
                 <LandingAboutImage />
                 <div className="md:w-1/2 w-full space-y-6">
                     <LandingTitle align="text-left">
-                        Menyajikan konten pembelajaran langsung dari guru
+                        Menyajikan{" "}
+                        <span className="text-orange-500">
+                            konten pembelajaran langsung
+                        </span>{" "}
+                        dari guru
                     </LandingTitle>
                     <Description
                         size="text-2xl"
-                        desc="Platform Inter memberikan fitur yang mana guru dapat memberikan materi pembelajaran kepada siswanya yakni menggabungkan materi berupa text dan video."
+                        desc="Nikmati fitur dimana guru dapat memberikan materi pembelajaran kepada siswanya yakni menggabungkan materi berupa text dan video."
                     />
                     <Link
                         href={

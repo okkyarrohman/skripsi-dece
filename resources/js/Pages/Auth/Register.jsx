@@ -22,7 +22,11 @@ export default function Register() {
     };
 
     return (
-        <AuthTemplate title="Register" desc="Daftar untuk memulai pembelajaran">
+        <AuthTemplate
+            register
+            title="Register"
+            desc="Daftar untuk memulai pembelajaran"
+        >
             <form onSubmit={handleOnSubmit}>
                 <div className="space-y-6">
                     <div>
