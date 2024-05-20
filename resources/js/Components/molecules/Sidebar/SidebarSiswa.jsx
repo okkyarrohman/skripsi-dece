@@ -139,7 +139,10 @@ export default function SidebarSiswa({ url }) {
 
             {/* Bottom Menu */}
             <ul className="h-1/4 w-full flex flex-col justify-end md:gap-6 gap-2 md:mt-0 mt-10">
-                <SidebarLink>
+                <SidebarLink
+                    link={route("panduan")}
+                    active={url.startsWith("/siswa/panduan")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

@@ -268,7 +268,10 @@ export default function SidebarGuru({ url }) {
 
             {/* Bottom Menu */}
             <ul className="h-1/4 w-full flex flex-col justify-end gap-6">
-                <SidebarLink>
+                <SidebarLink
+                    link={route("panduan-guru")}
+                    active={url.startsWith("/guru/panduan")}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
