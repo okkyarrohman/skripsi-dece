@@ -14,6 +14,7 @@ export default function ReferensiCreate({ auth }) {
         slug: "",
         description: "",
         file: null,
+        link_youtube: "",
     });
 
     const handleOnSubmit = (e) => {
@@ -95,6 +96,24 @@ export default function ReferensiCreate({ auth }) {
                             onChange={(e) => setData("file", e.target.files[0])}
                         />
                         <InputError message={errors.file} className="mt-2" />
+                    </div>
+                    <div>
+                        <Label
+                            htmlFor="link_youtube"
+                            text="Link Video Referensi"
+                        />
+                        <InputText
+                            name="link_youtube"
+                            placeholder="Link Video Referensi..."
+                            value={data.link_youtube}
+                            onChange={(e) =>
+                                setData("link_youtube", e.target.value)
+                            }
+                        />
+                        <InputError
+                            message={errors.link_youtube}
+                            className="mt-2"
+                        />
                     </div>
                     <PrimaryButton type="submit" className="ml-auto">
                         Tambah Referensi

@@ -28,7 +28,7 @@ return new class extends Migration
             // $table->json('total_login_by_month')->nullable();
             $table->timestamps();
 
-            $table->foreign('kelompok_id')->references('id')->on('kelompoks');
+            $table->foreign('kelompok_id')->references('id')->on('kelompoks')->cascadeOnDelete();
         });
     }
 

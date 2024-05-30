@@ -24,9 +24,9 @@ return new class extends Migration
             $table->longText('feedback')->nullable();
             $table->timestamps();
 
-            $table->foreign('tugas_id')->references('id')->on('tugases');
+            $table->foreign('tugas_id')->references('id')->on('tugases')->cascadeOnDelete();
             // $table->foreign('kelompok_id')->references('id')->on('kelompoks');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

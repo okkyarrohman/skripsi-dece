@@ -7,6 +7,7 @@ use App\Models\Referensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class ReferensiGuruController extends Controller
@@ -38,15 +39,16 @@ class ReferensiGuruController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
             'description' => 'required|string',
-            'file' => 'required|file|mimes:pdf|max:2048',
+            'file' => 'file|mimes:pdf|max:2048|nullable',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
             'slug.required' => 'Slug tidak boleh kosong',
             'description.required' => 'Deskripsi tidak boleh kosong',
-            'file.required' => 'File harus diunggah',
             'file.mimes' => 'File harus berupa format PDF',
             'file.max' => 'Ukuran file tidak boleh melebihi 2MB',
         ]);
+
+        $fileName = null;
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -63,7 +65,9 @@ class ReferensiGuruController extends Controller
             'name' => $request->input('name'),
             'slug' => $request->input('slug'),
             'description' => $request->input('description'),
-            'file' => $fileName
+            'file' => $fileName,
+            'link_youtube' => $request->input('link_youtube'),
+            'embed_youtube' => $this->extractVideoId($request->input('link_youtube'))
         ]);
 
         return to_route('referensi-guru.index');
@@ -98,12 +102,11 @@ class ReferensiGuruController extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
             'description' => 'required|string',
-            'file' => 'required',
+            'file' => 'nullable',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
             'slug.required' => 'Slug tidak boleh kosong',
             'description.required' => 'Deskripsi tidak boleh kosong',
-            'file.required' => 'File harus diunggah',
         ]);
 
         if ($validator->fails()) {
@@ -123,6 +126,7 @@ class ReferensiGuruController extends Controller
 
         $referensisUpdate = $request->all();
         $referensisUpdate['file'] = $fileName;
+        $referensisUpdate['embed_youtube'] = $this->extractVideoId($request->input('link_youtube'));
 
         $referensis->update($referensisUpdate);
 
@@ -141,5 +145,20 @@ class ReferensiGuruController extends Controller
         $referensis->delete();
 
         return to_route('referensi-guru.index');
+    }
+
+    public function extractVideoId($url)
+    {
+        $videoId = '';
+
+        if (Str::contains($url, 'youtu.be')) {
+            $videoId = Str::afterLast($url, '/');
+        }
+        else if (Str::contains($url, 'watch?v=')) {
+            $videoId = Str::after(Str::after($url, 'watch?v='), '/');
+            $videoId = Str::before($videoId, '&');
+        }
+
+        return $videoId;
     }
 }

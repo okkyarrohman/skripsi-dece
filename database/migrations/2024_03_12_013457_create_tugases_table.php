@@ -24,7 +24,7 @@ return new class extends Migration
             $table->longText('question_3');
             $table->timestamps();
 
-            $table->foreign('kelompok_id')->references('id')->on('kelompoks');
+            $table->foreign('kelompok_id')->references('id')->on('kelompoks')->cascadeOnDelete();
         });
     }
 

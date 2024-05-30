@@ -9,6 +9,7 @@ use App\Models\Materi;
 use App\Models\MonthlyLogin;
 use App\Models\Tugas;
 use App\Models\TugasAnswer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -34,10 +35,35 @@ class DashboardController extends Controller
 
         $materis = Materi::latest()->take(5)->get();
 
-        $kegiatans = Kegiatan::latest()->take(3)->get();
+        $kegiatans = Kegiatan::latest('date_start')->take(3)->get();
+
+        $tugases = Tugas::latest('deadline_date')->take(3)->get();
+
+        $currentDate = Carbon::now();
+        $selectedKegiatans = Kegiatan::where('date_start', '>=', $currentDate)->get(['id', 'name', 'date_start', 'time_start', 'is_active']);
+        $selectedTugases = Tugas::where('deadline_date', '>=', $currentDate)->get(['id', 'name', 'deadline_date', 'deadline_time', 'is_active']);
+        $aktivitases = $selectedKegiatans->map(function($item) {
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+                'date' => $item->date_start,
+                'time' => $item->time_start,
+                'type' => 'kegiatan',
+                'is_active' => $item->is_active,
+            ];
+        })->merge($selectedTugases->map(function($item) {
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+                'date' => $item->deadline_date,
+                'time' => $item->deadline_time,
+                'type' => 'tugas',
+                'is_active' => $item->is_active,
+            ];
+        }))->sortByDesc('date')->take(5)->values()->toArray();
 
         $monthlyLogins = MonthlyLogin::where('user_id', Auth::user()->id)->first();
 
-        return Inertia::render('Siswa/Dashboard', compact('absens', 'materis', 'kegiatans', 'monthlyLogins'));
+        return Inertia::render('Siswa/Dashboard', compact('absens', 'materis', 'kegiatans', 'monthlyLogins', 'tugases', 'aktivitases'));
     }
 }

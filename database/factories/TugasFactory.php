@@ -22,7 +22,7 @@ class TugasFactory extends Factory
             'is_active' => $this->faker->randomElement(['Y', 'N']),
             'name' => $this->faker->name(),
             'description' => $this->faker->paragraph(),
-            'deadline_date' => $this->faker->date(),
+            'deadline_date' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
             'deadline_time' => $this->faker->time(),
             'question_1' => $this->faker->paragraph(),
             'question_2' => $this->faker->paragraph(),

@@ -18,9 +18,9 @@ class KegiatanFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'date_start' => $this->faker->date(),
+            'date_start' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
             'time_start' => $this->faker->time(),
-            'date_end' => $this->faker->date(),
+            'date_end' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
             'time_end' => $this->faker->time(),
             'is_active' => $this->faker->randomElement(['Y', 'N']),
         ];

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('file');
+            $table->string('file')->nullable();
+            $table->string('link_youtube')->nullable();
+            $table->string('embed_youtube')->nullable();
             $table->longText('description');
             $table->integer('seen_time')->default(0);
             $table->timestamps();

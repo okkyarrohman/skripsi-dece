@@ -26,13 +26,13 @@ class DatabaseSeeder extends Seeder
         $this->call([RoleSeeder::class]);
         $this->call([UserSeeder::class]);
 
-        Kelompok::factory(1)->create();
-        // User::factory(5)->create();
-        // Materi::factory(5)->create();
-        Tugas::factory(1)->create();
-        // Referensi::factory(5)->create();
+        Kelompok::factory(5)->create();
+        User::factory(5)->create();
+        Materi::factory(5)->create();
+        Tugas::factory(4)->create();
+        Referensi::factory(5)->create();
         Absen::factory(1)->create();
-        // Kegiatan::factory(5)->create();
+        Kegiatan::factory(5)->create();
         // TugasAnswer::factory(10)->create();
     }
 }

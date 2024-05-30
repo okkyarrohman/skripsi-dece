@@ -4,28 +4,38 @@ import { Link } from "@inertiajs/react";
 import { useState } from "react";
 import Calendar from "react-calendar";
 
-export default function DashboardKegiatan({ kegiatan, children, markedDates }) {
+export default function DashboardKegiatan({ kegiatan, tugases, children }) {
     const [date, setDate] = useState(new Date());
-    // const markedDates = kegiatans.map((kegiatan) => new Date(kegiatan.date));
+
+    // Combine marked dates from both kegiatan and tugases
+    const markedDates = [
+        ...kegiatan.map(({ date_start }) => ({
+            type: "kegiatan",
+            date: new Date(date_start),
+        })),
+        ...tugases.map(({ deadline_date }) => ({
+            type: "tugas",
+            date: new Date(deadline_date),
+        })),
+    ];
 
     const tileContent = ({ date, view }) => {
         if (view === "month") {
-            // const isMarked = markedDates.find(
-            //     (markedDate) =>
-            //         markedDate.toDateString() === date.toDateString()
-            // );
-            const isMarked = markedDates.filter(({ date_start, date_end }) => {
-                const startDate = new Date(date_start);
-                const endDate = new Date(date_end);
-                return date >= startDate && date <= endDate;
+            const isMarked = markedDates.filter((markedDate) => {
+                // if (markedDate.type === "kegiatan") {
+                //     return date == markedDate.date_start;
+                // }
+                return date.toDateString() === markedDate.date.toDateString();
             });
-            // return isMarked ? (
-            //     <div className="bg-orange-500 size-3 rounded-full mx-auto"></div>
-            // ) : null;
-            return isMarked.map(({ id }) => (
+
+            return isMarked.map((markedDate, index) => (
                 <div
-                    key={id}
-                    className={`bg-orange-500 size-3 rounded-full mt-1 mx-auto`}
+                    key={index}
+                    className={`${
+                        markedDate.type === "kegiatan"
+                            ? "bg-orange-500"
+                            : "bg-blue-500"
+                    } size-3 rounded-full mt-1 mx-auto`}
                 ></div>
             ));
         }

@@ -15,13 +15,16 @@ export default function Dashboard({ auth }) {
         materis,
         kegiatans,
         monthlyLogins,
+        tugases,
+        aktivitases,
     } = usePage().props;
 
     // const markedDates = kegiatans.map(
     //     (kegiatan) => new Date(kegiatan.date_start)
     // );
 
-    // console.log(markedDates);
+    console.log(aktivitases);
+    console.log(kegiatans);
 
     const currentAbsenByUserId =
         absen &&
@@ -84,17 +87,15 @@ export default function Dashboard({ auth }) {
                 </div>
                 <div className="col-span-6 space-y-6">
                     <DashboardChartTotalLogin data={data} />
-                    <DashboardKegiatan
-                        markedDates={kegiatans}
-                        kegiatan={kegiatans.length != 0}
-                    >
-                        {kegiatans.map((kegiatan, index) => {
+                    <DashboardKegiatan tugases={tugases} kegiatan={kegiatans}>
+                        {aktivitases.map((aktivitas, index) => {
                             return (
                                 <KegiatanItem
                                     key={index}
-                                    name={kegiatan.name}
-                                    date={kegiatan.date_end}
-                                    time={kegiatan.time_end}
+                                    type={aktivitas.type}
+                                    name={aktivitas.name}
+                                    date={aktivitas.date}
+                                    time={aktivitas.time}
                                 />
                             );
                         })}

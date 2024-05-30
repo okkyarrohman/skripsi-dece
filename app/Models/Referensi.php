@@ -15,6 +15,8 @@ class Referensi extends Model
         'name',
         'slug',
         'file',
+        'link_youtube',
+        'embed_youtube',
         'description',
         'seen_time'
     ];

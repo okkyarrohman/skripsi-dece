@@ -40,7 +40,20 @@ export default function ReferensiShow({ auth }) {
                     </a>
                 </div>
                 <Description desc={referensi.description} />
-                <PdfViewer src={`/storage/referensi/` + referensi.file} />
+                {referensi.file && (
+                    <PdfViewer src={`/storage/referensi/` + referensi.file} />
+                )}
+                {referensi.link_youtube && (
+                    <iframe
+                        src={`https://www.youtube.com/embed/${referensi.embed_youtube}`}
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                        className="w-full md:h-[32rem] h-72 rounded-lg"
+                    ></iframe>
+                )}
             </div>
         </AuthenticatedLayout>
     );

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('total_login_december')->default(0)->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
