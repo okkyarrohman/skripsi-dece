@@ -37,7 +37,7 @@ class AbsenGuruController extends Controller
         $validator = Validator::make($request->all(), [
             'is_active' => 'required',
             'name' => 'required|string|max:255',
-            'meet_date' => 'required|date' ,
+            'meet_date' => 'required|date',
         ], [
             'is_active.required' => 'Status kelompok harus dipilih',
             'name.required' => 'Nama tidak boleh kosong',
@@ -65,12 +65,18 @@ class AbsenGuruController extends Controller
      */
     public function show(string $id)
     {
-        $users = User::where('role', 'siswa')->with(['kelompoks'])->get();
+        $users = User::where('role', 'siswa')
+            ->with(['kelompoks'])
+            ->orderBy('name') // Urutkan berdasarkan nama pengguna
+            ->get();
 
-        $absens = Absen::where('id', $id)->with(['presents.users.kelompoks'])->first();
+        $absens = Absen::where('id', $id)
+            ->with(['presents.users.kelompoks'])
+            ->first();
 
         return Inertia::render('Guru/Absen/AbsenShow', compact('users', 'absens'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -92,7 +98,7 @@ class AbsenGuruController extends Controller
         $validator = Validator::make($request->all(), [
             'is_active' => 'required',
             'name' => 'required|string|max:255',
-            'meet_date' => 'required|date' ,
+            'meet_date' => 'required|date',
         ], [
             'is_active.required' => 'Status kelompok harus dipilih',
             'name.required' => 'Nama tidak boleh kosong',
