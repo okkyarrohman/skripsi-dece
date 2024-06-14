@@ -14,10 +14,14 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        $absens = Absen::with(['presents'])->get();
+        $absens = Absen::with(['presents'])
+            ->join('users', 'absens.user_id', '=', 'users.id')
+            ->orderBy('users.name')
+            ->get();
 
         return Inertia::render('Siswa/Absen/AbsenIndex', compact('absens'));
     }
+
 
     /**
      * Show the form for creating a new resource.
