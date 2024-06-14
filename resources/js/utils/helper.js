@@ -18,7 +18,7 @@ export const formattedNumber = (numberValue) => {
     return formatNumber;
 };
 
-export const storageUrl = "http://127.0.0.1:8000/storage";
+export const storageUrl = "https://jagoconfig.com/storage";
 
 export const checkDeadlinePassed = (date, time) => {
     const [hours, minutes] = time.split(":").map(Number);
