@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TugasController extends Controller
@@ -38,7 +39,10 @@ class TugasController extends Controller
      */
     public function show(string $id)
     {
-        $tugases = Tugas::where('id', $id)->first();
+        $user = Auth::user();
+        $tugases = Tugas::where('id', $id)
+            ->where('kelompok_id', $user->kelompok_id)
+            ->first();
 
         return Inertia::render('Siswa/Tugas/TugasShow', compact('tugases'));
     }
