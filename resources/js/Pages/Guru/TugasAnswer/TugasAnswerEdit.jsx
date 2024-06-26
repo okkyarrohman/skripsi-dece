@@ -199,6 +199,9 @@ export default function TugasAnswerEdit({ auth }) {
                                 placeholder="Nilai Tugas..."
                                 disabled
                                 value={data.grade}
+                                onChange={(e) =>
+                                    setData("grade", e.target.value)
+                                }
                             />
                             <InputError
                                 message={errors.grade}

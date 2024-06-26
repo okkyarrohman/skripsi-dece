@@ -96,7 +96,7 @@ class TugasAnswerGuruController extends Controller
         $nilaiHasil = $request->input('nilaiHasil');
         $nilaiPenutup = $request->input('nilaiPenutup');
 
-        $totalGrade = ($nilaiPersiapan + $nilaiProses + $nilaiWaktu + $nilaiHasil + $nilaiPenutup / 25) * 100;
+        $totalGrade = (($nilaiPersiapan + $nilaiProses + $nilaiWaktu + $nilaiHasil + $nilaiPenutup) / 25) * 100;
 
 
 
