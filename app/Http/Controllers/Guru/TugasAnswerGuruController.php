@@ -73,11 +73,9 @@ class TugasAnswerGuruController extends Controller
         $answers = TugasAnswer::find($id);
 
         $validator = Validator::make($request->all(), [
-            'grade' => 'required|numeric',
             'grade_category' => 'required|string|in:A,B,C,D,E',
             'feedback' => 'required|string',
         ], [
-            'grade.required' => 'Nilai tidak boleh kosong',
             'nilai.numeric' => 'Nilai harus berupa angka',
             'grade_category.required' => 'Kategori nilai tidak boleh kosong',
             'grade_category.string' => 'Kategori nilai harus berupa teks',
@@ -90,9 +88,31 @@ class TugasAnswerGuruController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $answersUpdate = $request->only(['grade', 'grade_category', 'feedback']);
 
-        $answers->update($answersUpdate);
+
+        $nilaiPersiapan = $request->input('nilaiPersiapan');
+        $nilaiProses = $request->input('nilaiProses');
+        $nilaiWaktu = $request->input('nilaiWaktu');
+        $nilaiHasil = $request->input('nilaiHasil');
+        $nilaiPenutup = $request->input('nilaiPenutup');
+
+        $totalGrade = ($nilaiPersiapan + $nilaiProses + $nilaiWaktu + $nilaiHasil + $nilaiPenutup / 25) * 100;
+
+
+
+
+        $answerUpdate = [
+            'nilaiPersiapan' => $nilaiPersiapan,
+            'nilaiProses' => $nilaiProses,
+            'nilaiWaktu' => $nilaiWaktu,
+            'nilaiHasil' => $nilaiHasil,
+            'nilaiPenutup' => $nilaiPenutup,
+            'grade' => $totalGrade,
+            'grade_category' => $request->input('grade_category'),
+            'feedback' => $request->input('feedback'),
+        ];
+
+        $answers->update($answerUpdate);
 
         return to_route('tugas-answer-guru.edit', $id);
     }

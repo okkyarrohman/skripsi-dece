@@ -18,16 +18,23 @@ class TugasAnswer extends Model
         'answer_1',
         'answer_2',
         'answer_3',
+        'nilaiPersiapan',
+        'nilaiProses',
+        'nilaiWaktu',
+        'nilaiHasil',
+        'nilaiPenutup',
         'grade',
         'grade_category',
         'feedback'
     ];
 
-    public function tugas() {
+    public function tugas()
+    {
         return $this->belongsTo(Tugas::class, 'tugas_id', 'id');
     }
 
-    public function users() {
+    public function users()
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

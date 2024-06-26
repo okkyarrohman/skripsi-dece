@@ -20,7 +20,11 @@ export default function TugasAnswerEdit({ auth }) {
 
     const { data, setData, post, errors } = useForm({
         _method: "patch",
-        grade: answer.grade,
+        nilaiPersiapan: answer.nilaiPersiapan,
+        nilaiProses: answer.nilaiProses,
+        nilaiWaktu: answer.nilaiWaktu,
+        nilaiHasil: answer.nilaiHasil,
+        nilaiPenutup: answer.nilaiPenutup,
         grade_category: answer.grade_category,
         feedback: answer.feedback,
     });
@@ -109,15 +113,92 @@ export default function TugasAnswerEdit({ auth }) {
                     </IconTitle>
                     <form onSubmit={handleOnSubmit} className="space-y-4">
                         <div>
-                            <Label htmlFor="grade" text="Penilaian" />
+                            <Label htmlFor="grade" text="Aspek Penilaian (1-5)" />
                             <InputText
                                 autoFocus={data.grade == null}
-                                name="grade"
-                                placeholder="Nilai Tugas..."
-                                value={data.grade}
+                                name="nilaiPersiapan"
+                                placeholder="Nilai Persiapan..."
+                                value={data.nilaiPersiapan}
                                 onChange={(e) =>
-                                    setData("grade", e.target.value)
+                                    setData("nilaiPersiapan", e.target.value)
                                 }
+                            />
+                            <InputError
+                                message={errors.grade}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor="grade" text="Aspek Proses (1-5)" />
+                            <InputText
+                                autoFocus={data.grade == null}
+                                name="nilaiProses"
+                                placeholder="Nilai Proses..."
+                                value={data.nilaiProses}
+                                onChange={(e) =>
+                                    setData("nilaiProses", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.grade}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor="grade" text="Aspek Waktu (1-5)" />
+                            <InputText
+                                autoFocus={data.grade == null}
+                                name="nilaiWaktu"
+                                placeholder="Nilai Waktu..."
+                                value={data.nilaiWaktu}
+                                onChange={(e) =>
+                                    setData("nilaiWaktu", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.grade}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor="grade" text="Aspek Hasil (1-5)" />
+                            <InputText
+                                autoFocus={data.grade == null}
+                                name="nilaiHasil"
+                                placeholder="Nilai Hasil..."
+                                value={data.nilaiHasil}
+                                onChange={(e) =>
+                                    setData("nilaiHasil", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.grade}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor="grade" text="Aspek Penutup (1-5)" />
+                            <InputText
+                                autoFocus={data.grade == null}
+                                name="nilaiPenutup"
+                                placeholder="Nilai Penutup..."
+                                value={data.nilaiPenutup}
+                                onChange={(e) =>
+                                    setData("nilaiPenutup", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.grade}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor="grade" text="Total Nilai" />
+                            <InputText
+                                autoFocus={data.grade == null}
+                                placeholder="Nilai Tugas..."
+                                disabled
+                                value={data.grade}
                             />
                             <InputError
                                 message={errors.grade}
