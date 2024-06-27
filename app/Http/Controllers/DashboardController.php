@@ -81,30 +81,31 @@ class DashboardController extends Controller
         $selectedKegiatans = Kegiatan::where('date_start', '>=', $currentDate)->get(['id', 'name', 'date_start', 'time_start', 'is_active']);
         $selectedTugases = Tugas::where('deadline_date', '>=', $currentDate)->get(['id', 'name', 'deadline_date', 'deadline_time', 'is_active']);
 
+        // Convert to collections if not already
         $selectedKegiatans = $selectedKegiatans->map(function ($item) {
-            return [
+            return collect([
                 'id' => $item->id,
                 'name' => $item->name,
                 'date' => $item->date_start,
                 'time' => $item->time_start,
                 'type' => 'kegiatan',
                 'is_active' => $item->is_active,
-            ];
+            ]);
         });
 
         $selectedTugases = $selectedTugases->map(function ($item) {
-            return [
+            return collect([
                 'id' => $item->id,
                 'name' => $item->name,
                 'date' => $item->deadline_date,
                 'time' => $item->deadline_time,
                 'type' => 'tugas',
                 'is_active' => $item->is_active,
-            ];
+            ]);
         });
 
         // Combine both collections and sort by date
-        $aktivitases = $selectedKegiatans->merge($selectedTugases)->sortByDesc('date')->take(5)->values();
+        $aktivitases = $selectedKegiatans->concat($selectedTugases)->sortByDesc('date')->take(5)->values();
 
         $monthlyLogins = MonthlyLogin::where('user_id', Auth::user()->id)->first();
 
