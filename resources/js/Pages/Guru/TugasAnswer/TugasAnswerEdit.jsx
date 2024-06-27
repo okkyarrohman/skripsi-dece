@@ -198,7 +198,7 @@ export default function TugasAnswerEdit({ auth }) {
                                 autoFocus={data.grade == null}
                                 placeholder="Nilai Tugas..."
                                 disabled
-                                value={data.grade}
+                                value={answer.grade}
                                 onChange={(e) =>
                                     setData("grade", e.target.value)
                                 }
